@@ -40,8 +40,8 @@ fi
 mkdir $DIRECTORY/var/composer_home
 
 ## Copy Json Auth
-if [ -e auth.json ]; then
-	cp $COMPOSER_AUTH_JSON_FILE_PATH $DIRECTORY/var/composer_home/auth.json
+if [ -e $COMPOSER_AUTH_JSON_FILE_PATH ]; then
+        cp $COMPOSER_AUTH_JSON_FILE_PATH $DIRECTORY/var/composer_home/auth.json
 fi
 
 ## Sample Data Deploy
