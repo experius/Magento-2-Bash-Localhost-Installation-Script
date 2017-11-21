@@ -44,6 +44,10 @@ if [ -e $COMPOSER_AUTH_JSON_FILE_PATH ]; then
         cp $COMPOSER_AUTH_JSON_FILE_PATH $DIRECTORY/var/composer_home/auth.json
 fi
 
+## Make Code Dir
+mkdir $DIRECTORY/app/code
+mkdir $DIRECTORY/app/code/$MAGENTO_MODULE_VENDOR
+
 ## Sample Data Deploy
 php $DIRECTORY/bin/magento sampledata:deploy 
 
