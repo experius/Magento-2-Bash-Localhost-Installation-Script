@@ -1,13 +1,15 @@
-if [ -e config.sh ]
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+CONFIGPATH=$SCRIPTPATH/config.sh
+if [ -e $CONFIGPATH ]
 then
-    source config.sh
+    . $CONFIGPATH
 else
-    source config.sample.sh
+    . $SCRIPTPATH/config.sample.sh
 fi
 
 NAME=$1
 EDITION=$2
-OPTIONS=${@:3}
+OPTIONS=$3
 
 if [ -z "$NAME" ]; then
 	echo "enter name. Will be used as  $DOMAIN_PREFIX<yourname>$DOMAIN_SUFFIX"
