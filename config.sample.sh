@@ -6,6 +6,7 @@ MAGENTO_USERNAME="sandbox"
 MAGENTO_PASSWORD="s@ndb0x!"
 MAGENTO_USER_EMAIL="sandbox@example.com"
 MAGENTO_ADMIN_URL="admin"
+MAGENTO_MODULE_VENDOR="Vendor"
 
 DOMAINS_PATH="/Users/Macbook/Documents/Development/Domains"
 

@@ -1,13 +1,15 @@
-if [ -e config.sh ]
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+CONFIGPATH=$SCRIPTPATH/config.sh
+if [ -e $CONFIGPATH ]
 then
-    source config.sh
+    . $CONFIGPATH
 else
-    source config.sample.sh
+    . $SCRIPTPATH/config.sample.sh
 fi
 
 NAME=$1
 EDITION=$2
-OPTIONS=${@:3}
+OPTIONS=$3
 
 if [ -z "$NAME" ]; then
 	echo "enter name. Will be used as  $DOMAIN_PREFIX<yourname>$DOMAIN_SUFFIX"
@@ -44,6 +46,10 @@ if [ -e $COMPOSER_AUTH_JSON_FILE_PATH ]; then
         cp $COMPOSER_AUTH_JSON_FILE_PATH $DIRECTORY/var/composer_home/auth.json
 fi
 
+## Make Code Dir
+mkdir $DIRECTORY/app/code
+mkdir $DIRECTORY/app/code/$MAGENTO_MODULE_VENDOR
+
 ## Sample Data Deploy
 php $DIRECTORY/bin/magento sampledata:deploy 
 
@@ -54,6 +60,10 @@ php $DIRECTORY/bin/magento setup:upgrade
 
 ## Developer Settings
 php $DIRECTORY/bin/magento deploy:mode:set developer
+php $DIRECTORY/bin/magento cache:disable layout block_html collections full_page
 
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'admin/security/session_lifetime', '31536000') ON DUPLICATE KEY UPDATE value='31536000';"
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'web/cookie/cookie_lifetime', '31536000') ON DUPLICATE KEY UPDATE value='31536000';"
+mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'dev/static/sign', '0') ON DUPLICATE KEY UPDATE value='0';"
+mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'system/smtp/disable', '1') ON DUPLICATE KEY UPDATE value='1';"
+
