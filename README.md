@@ -5,12 +5,12 @@ Simply create Magento 2 Website on your localmachine!
 
 Make a copy of the config.sample.sh file and update according to your localmachine.
 
- - [Main Functionalities](#markdown-header-main-functionalities
+ - [Main Functionalities](#markdown-header-main-functionalities)
 
 
 ## Main Functionalities
 
- - [Create Website] (#markdown-header-create-website)
+ - [Create Website] (#create-website)
  - [Add Module] (#markdown-header-add-module)
  - [Update Modules] (#markdown-header-update-modules)
  - [Code Quality Scan] (#markdown-header-code-quality-scan)
