@@ -5,8 +5,15 @@ Simply create Magento 2 Website on your localmachine!
 
 Make a copy of the config.sample.sh file and update according to your localmachine.
 
+ - [Main Functionalities](#markdown-header-main-functionalities
 
-## Global Function
+
+## Main Functionalities
+
+ - [Create Website] (#markdown-header-create-website)
+ - [Add Module] (#markdown-header-add-module)
+ - [Update Modules] (#markdown-header-update-modules)
+ - [Code Quality Scan] (#markdown-header-code-quality-scan)
 
 add functios to your .bashrc or .bash_aliases file
 
@@ -16,6 +23,7 @@ add functios to your .bashrc or .bash_aliases file
 function create_website() {
     bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/install.sh $1 $2 $3
 }
+```
 
 #### Examples of Website Create/Install
 
@@ -38,8 +46,6 @@ create_website example
 create_website example enterprise
 ```
 
-
-```
 ### Add Module
 
 ```
