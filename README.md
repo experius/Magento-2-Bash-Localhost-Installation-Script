@@ -5,6 +5,15 @@ Simply create Magento 2 Website on your localmachine!
 
 Make a copy of the config.sample.sh file and update according to your localmachine.
 
+Include .bash_xp in .bashrc or .bash_aliases, include example:
+
+```
+if [ -f ~/tools/Magento-2-Bash-Localhost-Installation-Script/.bash_xp ]; then
+    . ~/tools/Magento-2-Bash-Localhost-Installation-Script/.bash_xp
+fi
+```
+
+
  - [Main Functionalities](#main-functionalities)
 
 
@@ -15,14 +24,18 @@ Make a copy of the config.sample.sh file and update according to your localmachi
  - [Update Modules](#update-modules)
  - [Code Quality Scan](#code-quality-scan)
 
-add functios to your .bashrc or .bash_aliases file
+
 
 ### Create Website
 
 ```
-function create_website() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/install.sh $1 $2 $3
-}
+$1 = name
+$2 = type
+$3 = folder
+```
+
+```
+create_website $1 $2 $3
 ```
 
 #### Examples of Website Create/Install
@@ -49,10 +62,12 @@ create_website example enterprise
 ### Add Module
 
 ```
-function add_module() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/add_module.sh $1 $2
-}
+$1 = module_name (without Vendor)
+$2 = repository_url
+```
 
+```
+add_module $1 $2
 ```
 
 usage (run in Magento 2 Root):
@@ -64,10 +79,7 @@ add_module Example https://github.com/example.git
 ### Update Modules
 
 ```
-function update_modules() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/update_modules.sh
-}
-
+update_modules
 ```
 
 usage (run in Magento 2 Root):
@@ -86,17 +98,15 @@ $3 = mode ('fix' will run phpcbf)
 ```
 
 ```
-function code_quality() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/code_quality.sh $1 $2 $3
-}
+code_quality $1 $2 $3
 ```
 
 usage (run in Magento 2 Root):
 
 ```
-codequality app/code/MyModule/Helloworld 7 
+code_quality app/code/MyModule/Helloworld 7 
 ```
 
 ```
-codequality app/code/MyModule/Helloworld 7 fix
+code_quality app/code/MyModule/Helloworld 7 fix
 ```
