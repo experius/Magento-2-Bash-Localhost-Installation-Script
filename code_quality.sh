@@ -20,7 +20,7 @@ if [ ! -d "$FULL_PATH" ]; then
 fi
 
 if [ "$MODE" = "fix" ]; then
-	$PHPCBS_PATH $FULL_PATH --standard=MEQP2 --extensions=php,phtml --severity=$SEVERITY
+	$PHPCBF_PATH $FULL_PATH --standard=MEQP2 --extensions=php,phtml --severity=$SEVERITY
 else
 	$PHPCS_PATH $FULL_PATH --standard=MEQP2 --extensions=php,phtml --severity=$SEVERITY
 fi
