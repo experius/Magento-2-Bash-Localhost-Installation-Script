@@ -16,6 +16,29 @@ add functios to your .bashrc or .bash_aliases file
 function create_website() {
     bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/install.sh $1 $2 $3
 }
+
+#### Examples of Website Create/Install
+
+use as followed:
+
+```
+create_website name type directory
+```
+
+##### Community Example:
+
+```
+create_website example
+```
+
+
+##### Enterprise Example:
+
+```
+create_website example enterprise
+```
+
+
 ```
 ### Add Module
 
@@ -47,27 +70,6 @@ usage (run in Magento 2 Root):
 update_modules
 ```
 
-## Examples of Website Create/Install
-
-use as followed:
-
-```
-create_website name type directory
-```
-
-### Community Example:
-
-```
-create_website example
-```
-
-
-### Enterprise Example:
-
-```
-create_website example enterprise
-```
-
 
 ### Code Quality Scan
 
@@ -79,7 +81,7 @@ $3 = mode ('fix' will run phpcbf)
 
 ```
 function code_quality() {
-    bash /Users/derrickheesbeen/Documents/Development/Scripts/Magento-2-Bash-Localhost-Installation-Script/code_quality.sh $1 $2 $3
+    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/code_quality.sh $1 $2 $3
 }
 ```
 
