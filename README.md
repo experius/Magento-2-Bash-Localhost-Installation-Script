@@ -10,10 +10,10 @@ Make a copy of the config.sample.sh file and update according to your localmachi
 
 ## Main Functionalities
 
- - [Create Website] (#create-website)
- - [Add Module] (#markdown-header-add-module)
- - [Update Modules] (#markdown-header-update-modules)
- - [Code Quality Scan] (#markdown-header-code-quality-scan)
+ - [Create Website](#markdown-header-create-website)
+ - [Add Module](#markdown-header-add-module)
+ - [Update Modules](#markdown-header-update-modules)
+ - [Code Quality Scan](#markdown-header-code-quality-scan)
 
 add functios to your .bashrc or .bash_aliases file
 
