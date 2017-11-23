@@ -69,3 +69,26 @@ create_website example enterprise
 ```
 
 
+### Code Quality Scan
+
+```
+$1 = path
+$2 = severity
+$3 = mode ('fix' will run phpcbf)
+```
+
+```
+function code_quality() {
+    bash /Users/derrickheesbeen/Documents/Development/Scripts/Magento-2-Bash-Localhost-Installation-Script/code_quality.sh $1 $2 $3
+}
+```
+
+usage (run in Magento 2 Root):
+
+```
+codequality app/code/MyModule/Helloworld 7 
+```
+
+```
+codequality app/code/MyModule/Helloworld 7 fix
+```

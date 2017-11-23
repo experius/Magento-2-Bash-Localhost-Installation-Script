@@ -8,9 +8,12 @@ MAGENTO_USER_EMAIL="sandbox@example.com"
 MAGENTO_ADMIN_URL="admin"
 MAGENTO_MODULE_VENDOR="Vendor"
 
-DOMAINS_PATH="/Users/Macbook/Documents/Development/Domains"
+DOMAINS_PATH="~/Documents/Development/Domains"
 
 DOMAIN_PREFIX="magento2."
 DOMAIN_SUFFIX=".local.example.com"
 
 COMPOSER_AUTH_JSON_FILE_PATH="auth.json"
+
+PHPCS_PATH="~/Documents/Development/magento-coding-standard/vendor/bin/phpcs"
+PHPCBF_PATH="~/Documents/Development/magento-coding-standard/vendor/bin/phpcbf"
