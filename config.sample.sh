@@ -15,5 +15,6 @@ DOMAIN_SUFFIX=".local.example.com"
 
 COMPOSER_AUTH_JSON_FILE_PATH="auth.json"
 
+##https://github.com/magento/marketplace-eqp
 PHPCS_PATH="~/Documents/Development/magento-coding-standard/vendor/bin/phpcs"
 PHPCBF_PATH="~/Documents/Development/magento-coding-standard/vendor/bin/phpcbf"
