@@ -1,3 +1,8 @@
+if [ ! -f app/etc/env.php ]; then
+    echo "This is command has to be executed from the root of your Magento 2 Installation"
+    exit;
+fi
+
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
 CONFIGPATH=$SCRIPTPATH/config.sh
