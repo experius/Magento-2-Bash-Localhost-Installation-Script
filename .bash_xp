@@ -14,5 +14,8 @@ function code_quality() {
     bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/code_quality.sh $1 $2 $3
 }
 
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
 alias m='magerun'
 alias m2='magerun2'
