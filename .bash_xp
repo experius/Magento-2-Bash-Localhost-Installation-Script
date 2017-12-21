@@ -14,6 +14,20 @@ function code_quality() {
     bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/code_quality.sh $1 $2 $3
 }
 
+site () 
+{ 
+    if [ $# -eq 0 ]; then
+        DOMAIN=`pwd | cut --delimiter="/" -f 5`;
+    else
+        DOMAIN="$@";
+    fi;
+    if [ -d "~/domains/$DOMAIN" ]; then
+        cd "~/domains/$DOMAIN";
+    else
+        echo "Given website does not exists";
+    fi
+}
+
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
