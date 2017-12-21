@@ -27,8 +27,8 @@ site ()
     else
         DOMAIN="$@";
     fi;
-    if [ -d "~/domains/$DOMAIN" ]; then
-        cd "~/domains/$DOMAIN";
+    if [ -d ~/domains/$DOMAIN ]; then
+        cd ~/domains/$DOMAIN;
     else
         echo "Given website does not exists";
     fi
