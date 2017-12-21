@@ -9,7 +9,8 @@ fi
 
 NAME=$1
 EDITION=$2
-OPTIONS=$3
+VERSION=$3
+OPTIONS=$4
 
 if [ -z "$NAME" ]; then
 	echo "enter name. Will be used as  $DOMAIN_PREFIX<yourname>$DOMAIN_SUFFIX"
@@ -33,9 +34,17 @@ mkdir $DIRECTORY
 
 ## Download Magento
 if [ "$EDITION" = "enterprise" ]; then
-	composer create-project --repository-url=https://repo.magento.com/ magento/project-enterprise-edition $DIRECTORY $OPTIONS
+  V="magento/project-enterprise-edition"
+  if [ "$VERSION" ]; then
+    V=$V"="$VERSION
+  fi
+	composer create-project --repository-url=https://repo.magento.com/ $V $DIRECTORY $OPTIONS
 else
-	composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition $DIRECTORY $OPTIONS
+  V="magento/project-community-edition"
+  if [ "$VERSION" ]; then
+    V=$V"="$VERSION
+  fi
+	composer create-project --repository-url=https://repo.magento.com/ $V $DIRECTORY $OPTIONS
 fi
 
 ## Install Sample Data 

@@ -1,5 +1,5 @@
 function create_website() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/install.sh $1 $2 $3
+    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/install.sh $1 $2 $3 $4
 }
 
 function add_module() {
