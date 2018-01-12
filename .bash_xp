@@ -1,5 +1,5 @@
 function create_website() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/install.sh $1 $2 $3
+    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/install.sh $1 $2 $3 $4
 }
 
 function add_module() {
@@ -14,5 +14,42 @@ function code_quality() {
     bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/code_quality.sh $1 $2 $3
 }
 
+_site () 
+{ 
+    local cur=${COMP_WORDS[COMP_CWORD]};
+    COMPREPLY=($(compgen -W "$(ls ~/domains)" -- $cur))
+}
+
+site () 
+{ 
+    if [ $# -eq 0 ]; then
+        DOMAIN=`pwd | cut --delimiter="/" -f 5`;
+    else
+        DOMAIN="$@";
+    fi;
+    if [ -d ~/domains/$DOMAIN ]; then
+        cd ~/domains/$DOMAIN;
+    else
+        echo "Given website does not exists";
+    fi
+}
+complete -F _site site
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
 alias m='magerun'
 alias m2='magerun2'
+
+# Git aliasses
+alias gs='git status'
+alias gc='git commit'
+alias ga='git add'
+alias gb='git branch'
+alias gl='git log'
+alias gco='git checkout'
+alias gcom='git checkout master'
+alias gam='git commit --amend --no-edit'
+alias gp='git push'
+alias gpom='git push origin master'
+alias gm='git merge'

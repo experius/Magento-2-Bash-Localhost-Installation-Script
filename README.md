@@ -31,11 +31,12 @@ fi
 ```
 $1 = name
 $2 = type
-$3 = folder
+$3 = version
+$4 = options
 ```
 
 ```
-create_website $1 $2 $3
+create_website $1 $2 $3 $4
 ```
 
 #### Examples of Website Create/Install
@@ -43,7 +44,7 @@ create_website $1 $2 $3
 use as followed:
 
 ```
-create_website name type directory
+create_website name type version
 ```
 
 ##### Community Example:
