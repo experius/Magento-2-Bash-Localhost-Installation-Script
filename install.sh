@@ -39,6 +39,11 @@ if [ "$EDITION" = "enterprise" ]; then
     V=$V"="$VERSION
   fi
 	composer create-project --repository-url=https://repo.magento.com/ $V $DIRECTORY $OPTIONS
+  composer require 'magento/module-gift-card-sample-data'
+  composer require 'magento/module-customer-balance-sample-data'
+  composer require 'magento/module-target-rule-sample-data'
+  composer require 'magento/module-gift-registry-sample-data'
+  composer require 'magento/module-multiple-wishlist-sample-data'
 else
   V="magento/project-community-edition"
   if [ "$VERSION" ]; then
