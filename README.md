@@ -111,3 +111,11 @@ code_quality app/code/MyModule/Helloworld 7
 ```
 code_quality app/code/MyModule/Helloworld 7 fix
 ```
+
+### Import Website from Backup
+
+Requires the following files to be in the destination domain folder: files.tar, structure.sql, data.sql
+
+```
+import_website magento.localhost.com
+```
