@@ -28,18 +28,22 @@ mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE_NAME < $DIRECTORY/data.sql
 
 ## Check if we are installing Magento 1 or 2
 if [ ! -f "$DIRECTORY/app/etc/env.php" ]; then
-        VERSION="M2"
+        VERSION="m2"
 else
-		VERSION="M1"        
+		VERSION="m"        
 fi 
 
-if [ "$VERSION" = "M2" ]; then
+if [ "$VERSION" = "m2" ]; then
 	## Create new env.php
 	php Helper/updateEnv.php -f $DIRECTORY -d $MYSQL_DATABASE_NAME -u $MYSQL_USER -p $MYSQL_PASSWORD
 else
 	## Create new local.xml
 	php Helper/updateLocal.php -f $DIRECTORY -d $MYSQL_DATABASE_NAME -u $MYSQL_USER -p $MYSQL_PASSWORD
-fi	
+fi
+
+## Delete Current Admin User and Create New Admin User
+$VERSION admin:user:delete $MAGENTO_USERNAME
+$VERSION admin:user:create --admin-user $MAGENTO_USERNAME --admin-password $MAGENTO_PASSWORD --admin-email $MAGENTO_USER_EMAIL --admin-firstname $MAGENTO_USERNAME --admin-lastname $MAGENTO_USERNAME
 
 ## Set correct base urls
 for CONFIG_PATH in 'web/unsecure/base_url' 'web/secure/base_url' 'web/unsecure/base_link_url' 'web/secure/base_link_url'
