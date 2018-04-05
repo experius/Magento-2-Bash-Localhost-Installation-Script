@@ -48,7 +48,7 @@ $VERSION admin:user:create --admin-user $MAGENTO_USERNAME --admin-password $MAGE
 ## Set correct base urls
 for CONFIG_PATH in 'web/unsecure/base_url' 'web/secure/base_url' 'web/unsecure/base_link_url' 'web/secure/base_link_url'
 do
-	mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "UPDATE \`core_config_data\` SET \`value\`='$URL' WHERE \`path\`='$CONFIG_PATH'"
+	mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "UPDATE \`core_config_data\` SET \`value\`='$URL/' WHERE \`path\`='$CONFIG_PATH'"
 done
 
 ## Developer Settings
