@@ -18,3 +18,6 @@ COMPOSER_AUTH_JSON_FILE_PATH="auth.json"
 ##https://github.com/magento/marketplace-eqp
 PHPCS_PATH="~/Documents/Development/magento-coding-standard/vendor/bin/phpcs"
 PHPCBF_PATH="~/Documents/Development/magento-coding-standard/vendor/bin/phpcbf"
+
+MAGERUN2_COMMAND="n98-magerun2"
+MAGERUN1_COMMAND="n98-magerun"
