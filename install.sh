@@ -75,6 +75,8 @@ php $DIRECTORY/bin/magento setup:upgrade
 ## Developer Settings
 php $DIRECTORY/bin/magento deploy:mode:set developer
 php $DIRECTORY/bin/magento cache:disable layout block_html collections full_page
+### Generated PhpStorm XML Schema Validation
+php $DIRECTORY/bin/magento dev:urn-catalog:generate .idea/misc.xml
 
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'admin/security/session_lifetime', '31536000') ON DUPLICATE KEY UPDATE value='31536000';"
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'web/cookie/cookie_lifetime', '31536000') ON DUPLICATE KEY UPDATE value='31536000';"
