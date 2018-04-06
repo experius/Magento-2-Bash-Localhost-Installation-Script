@@ -42,8 +42,12 @@ complete -F _site site
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
+# Magerun aliasses
 alias m='magerun'
 alias m2='magerun2'
+
+# PhpStorm aliasses
+alias p='phpstorm'
 
 # Git aliasses
 alias gs='git status'
