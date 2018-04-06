@@ -44,6 +44,7 @@ bind '"\e[B": history-search-forward'
 
 alias m='magerun'
 alias m2='magerun2'
+alias p='phpstorm'
 
 # Git aliasses
 alias gs='git status'
