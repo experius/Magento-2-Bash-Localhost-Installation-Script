@@ -23,7 +23,8 @@ fi
  - [Add Module](#add-module)
  - [Update Modules](#update-modules)
  - [Code Quality Scan](#code-quality-scan)
- - [Aliases] (#aliases)
+ - [Site Search Command](#site-search-command)
+ - [Aliases](#aliases)
 
 
 
@@ -114,11 +115,19 @@ code_quality app/code/MyModule/Helloworld 7 fix
 ```
 
 ### Import Website from Backup
+**This feature also supports import for a Magento 1 Webshop**
 
 Requires the following files to be in the destination domain folder: files.tar, structure.sql, data.sql
 
 ```
 import_website magento.localhost.com
+```
+
+### Site Search Command
+When you have installed your websites in ~/domains you can search through them with the following command. This functionality also supports autofill.
+
+```
+site <domain>
 ```
 
 
