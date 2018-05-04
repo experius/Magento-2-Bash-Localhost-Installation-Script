@@ -23,6 +23,7 @@ fi
  - [Add Module](#add-module)
  - [Update Modules](#update-modules)
  - [Code Quality Scan](#code-quality-scan)
+ - [Aliases] (#aliases)
 
 
 
@@ -119,3 +120,29 @@ Requires the following files to be in the destination domain folder: files.tar, 
 ```
 import_website magento.localhost.com
 ```
+
+
+### Aliases
+#### Magerun aliasses
+alias m='magerun'
+alias m2='magerun2'
+
+#### PhpStorm aliasses
+alias p='phpstorm'
+
+#### PHPX - Xdebug
+alias phpx='XDEBUG_CONFIG="idekey=PHPSTORM" php  -dxdebug.remote_enable=on -f'
+alias xphp='XDEBUG_CONFIG="idekey=PHPSTORM" php  -dxdebug.remote_enable=on -f'
+
+#### Git aliasses
+alias gs='git status'
+alias gc='git commit'
+alias ga='git add'
+alias gb='git branch'
+alias gl='git log'
+alias gco='git checkout'
+alias gcom='git checkout master'
+alias gam='git commit --amend --no-edit'
+alias gp='git push'
+alias gpom='git push origin master'
+alias gm='git merge'
