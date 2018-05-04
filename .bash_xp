@@ -49,6 +49,10 @@ alias m2='magerun2'
 # PhpStorm aliasses
 alias p='phpstorm'
 
+# PHPX - Xdebug
+alias phpx='XDEBUG_CONFIG="idekey=PHPSTORM" php  -dxdebug.remote_enable=on -f'
+alias xphp='XDEBUG_CONFIG="idekey=PHPSTORM" php  -dxdebug.remote_enable=on -f'
+
 # Git aliasses
 alias gs='git status'
 alias gc='git commit'
