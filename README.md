@@ -2,6 +2,10 @@
 
 Simply create Magento 2 Website on your localmachine!
 
+ - [Getting Started](#getting-started)
+ - [Main Functionalities](#main-functionalities)
+
+## Getting Started
 
 Make a copy of the config.sample.sh file and update according to your localmachine.
 
@@ -12,9 +16,6 @@ if [ -f ~/tools/Magento-2-Bash-Localhost-Installation-Script/.bash_xp ]; then
     . ~/tools/Magento-2-Bash-Localhost-Installation-Script/.bash_xp
 fi
 ```
-
-
- - [Main Functionalities](#main-functionalities)
 
 
 ## Main Functionalities
