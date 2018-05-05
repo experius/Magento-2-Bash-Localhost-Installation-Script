@@ -49,6 +49,7 @@ if [ -z "$BRANCH" ]; then
 else
     git clone -b $BRANCH $REMOTE $DIRECTORY
 fi
+git remote add fork $FORKED_REPO
 composer install -d=$DIRECTORY
 
 ## Install Sample Data

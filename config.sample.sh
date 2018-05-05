@@ -21,3 +21,5 @@ PHPCBF_PATH="~/Documents/Development/magento-coding-standard/vendor/bin/phpcbf"
 
 MAGERUN2_COMMAND="n98-magerun2"
 MAGERUN1_COMMAND="n98-magerun"
+
+FORKED_REPO="git@github.com:<username>/magento2.git"
