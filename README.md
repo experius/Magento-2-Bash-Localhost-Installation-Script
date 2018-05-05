@@ -42,6 +42,8 @@ $4 = options
 create_website $1 $2 $3 $4
 ```
 
+**Use create_pr_website to create the website based on the Github repository so you can easily make Pull Requests for Magento 2**
+
 #### Examples of Website Create/Install
 
 use as followed:
