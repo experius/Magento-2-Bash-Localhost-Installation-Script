@@ -159,6 +159,11 @@ alias m='magerun'
 alias m2='magerun2'
 ```
 
+#### PHP aliases
+```
+alias php7='php7.0'
+```
+
 #### PhpStorm aliasses
 ```
 alias p='phpstorm'
