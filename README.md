@@ -173,6 +173,8 @@ alias p='phpstorm'
 ```
 alias phpx='XDEBUG_CONFIG="idekey=PHPSTORM" php  -dxdebug.remote_enable=on -f'
 alias xphp='XDEBUG_CONFIG="idekey=PHPSTORM" php  -dxdebug.remote_enable=on -f'
+alias phpx7='XDEBUG_CONFIG="idekey=PHPSTORM" php7.0  -dxdebug.remote_enable=on -f'
+alias xphp7='XDEBUG_CONFIG="idekey=PHPSTORM" php7.0  -dxdebug.remote_enable=on -f'
 ```
 
 #### Git aliasses
