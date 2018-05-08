@@ -23,3 +23,5 @@ MAGERUN2_COMMAND="n98-magerun2"
 MAGERUN1_COMMAND="n98-magerun"
 
 FORKED_REPO="git@github.com:<username>/magento2.git"
+PHP7="php7.0"
+COMPOSER_PHP7="$PHP7 /usr/bin/composer"

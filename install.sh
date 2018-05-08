@@ -32,24 +32,37 @@ mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -e "CREATE DATABASE IF NOT EXISTS \`$MYSQL
 ## Create Webshop Directory
 mkdir $DIRECTORY
 
+COMPOSER="composer"
+PHP="php"
+if [ "$VERSION" ]; then
+    if [[ $VERSION = "2.1."* ]]; then
+        if [ "$PHP7" ]; then
+            PHP=$PHP7
+        fi
+        if [ "$COMPOSER_PHP7" ]; then
+            COMPOSER=$COMPOSER_PHP7
+        fi
+    fi
+fi
+
 ## Download Magento
 if [ "$EDITION" = "enterprise" ]; then
   V="magento/project-enterprise-edition"
   if [ "$VERSION" ]; then
     V=$V"="$VERSION
   fi
-	composer create-project --repository-url=https://repo.magento.com/ $V $DIRECTORY $OPTIONS
-  composer require 'magento/module-gift-card-sample-data'
-  composer require 'magento/module-customer-balance-sample-data'
-  composer require 'magento/module-target-rule-sample-data'
-  composer require 'magento/module-gift-registry-sample-data'
-  composer require 'magento/module-multiple-wishlist-sample-data'
+	$COMPOSER create-project --repository-url=https://repo.magento.com/ $V $DIRECTORY $OPTIONS
+  $COMPOSER require 'magento/module-gift-card-sample-data'
+  $COMPOSER require 'magento/module-customer-balance-sample-data'
+  $COMPOSER require 'magento/module-target-rule-sample-data'
+  $COMPOSER require 'magento/module-gift-registry-sample-data'
+  $COMPOSER require 'magento/module-multiple-wishlist-sample-data'
 else
   V="magento/project-community-edition"
   if [ "$VERSION" ]; then
     V=$V"="$VERSION
   fi
-	composer create-project --repository-url=https://repo.magento.com/ $V $DIRECTORY $OPTIONS
+	$COMPOSER create-project --repository-url=https://repo.magento.com/ $V $DIRECTORY $OPTIONS
 fi
 
 ## Install Sample Data 
@@ -65,18 +78,19 @@ mkdir $DIRECTORY/app/code
 mkdir $DIRECTORY/app/code/$MAGENTO_MODULE_VENDOR
 
 ## Sample Data Deploy
-php $DIRECTORY/bin/magento sampledata:deploy 
+$PHP $DIRECTORY/bin/magento sampledata:deploy 
 
 ## Install Magento
-php $DIRECTORY/bin/magento setup:install --admin-firstname="$MAGENTO_USERNAME" --admin-lastname="$MAGENTO_USERNAME" --admin-email="$MAGENTO_USER_EMAIL" --admin-user="$MAGENTO_USERNAME" --admin-password="$MAGENTO_PASSWORD" --base-url="http://$DOMAIN" --backend-frontname="$MAGENTO_ADMIN_URL" --db-host="localhost" --db-name="$MYSQL_DATABASE_NAME" --db-user="$MYSQL_USER" --db-password="$MYSQL_PASSWORD" --language=nl_NL --currency=EUR --timezone=Europe/Amsterdam --use-rewrites=1 --session-save=files --use-sample-data 	
+$PHP $DIRECTORY/bin/magento setup:install --admin-firstname="$MAGENTO_USERNAME" --admin-lastname="$MAGENTO_USERNAME" --admin-email="$MAGENTO_USER_EMAIL" --admin-user="$MAGENTO_USERNAME" --admin-password="$MAGENTO_PASSWORD" --base-url="http://$DOMAIN" --backend-frontname="$MAGENTO_ADMIN_URL" --db-host="localhost" --db-name="$MYSQL_DATABASE_NAME" --db-user="$MYSQL_USER" --db-password="$MYSQL_PASSWORD" --language=nl_NL --currency=EUR --timezone=Europe/Amsterdam --use-rewrites=1 --session-save=files --use-sample-data 	
 
-php $DIRECTORY/bin/magento setup:upgrade
+$PHP $DIRECTORY/bin/magento setup:upgrade
 
 ## Developer Settings
-php $DIRECTORY/bin/magento deploy:mode:set developer
-php $DIRECTORY/bin/magento cache:disable layout block_html collections full_page
+$PHP $DIRECTORY/bin/magento deploy:mode:set developer
+$PHP $DIRECTORY/bin/magento cache:disable layout block_html collections full_page
 ### Generated PhpStorm XML Schema Validation
-php $DIRECTORY/bin/magento dev:urn-catalog:generate .idea/misc.xml
+mkdir -p $DIRECTORY/.idea
+$PHP $DIRECTORY/bin/magento dev:urn-catalog:generate .idea/misc.xml
 
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'admin/security/session_lifetime', '31536000') ON DUPLICATE KEY UPDATE value='31536000';"
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'web/cookie/cookie_lifetime', '31536000') ON DUPLICATE KEY UPDATE value='31536000';"

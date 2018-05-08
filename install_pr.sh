@@ -32,6 +32,19 @@ mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -e "CREATE DATABASE IF NOT EXISTS \`$MYSQL
 ## Create Webshop Directory
 mkdir $DIRECTORY
 
+COMPOSER="composer"
+PHP="php"
+if [ "$VERSION" ]; then
+    if [[ $VERSION = "2.1."* ]]; then
+        if [ "$PHP7" ]; then
+            PHP=$PHP7
+        fi
+        if [ "$COMPOSER_PHP7" ]; then
+            COMPOSER=$COMPOSER_PHP7
+        fi
+    fi
+fi
+
 ## Download Magento
 if [ "$EDITION" = "enterprise" ]; then
   REMOTE="git@github.com:magento/magento2.git"
@@ -50,7 +63,7 @@ else
     git clone -b $BRANCH $REMOTE $DIRECTORY
 fi
 git remote add fork $FORKED_REPO
-composer install -d=$DIRECTORY
+$COMPOSER install -d=$DIRECTORY
 
 ## Install Sample Data
 mkdir $DIRECTORY/var/composer_home
@@ -61,18 +74,19 @@ if [ -e $COMPOSER_AUTH_JSON_FILE_PATH ]; then
 fi
 
 ## Sample Data Deploy
-php $DIRECTORY/bin/magento sampledata:deploy
+$PHP $DIRECTORY/bin/magento sampledata:deploy
 
 ## Install Magento
-php $DIRECTORY/bin/magento setup:install --admin-firstname="$MAGENTO_USERNAME" --admin-lastname="$MAGENTO_USERNAME" --admin-email="$MAGENTO_USER_EMAIL" --admin-user="$MAGENTO_USERNAME" --admin-password="$MAGENTO_PASSWORD" --base-url="http://$DOMAIN" --backend-frontname="$MAGENTO_ADMIN_URL" --db-host="localhost" --db-name="$MYSQL_DATABASE_NAME" --db-user="$MYSQL_USER" --db-password="$MYSQL_PASSWORD" --language=nl_NL --currency=EUR --timezone=Europe/Amsterdam --use-rewrites=1 --session-save=files --use-sample-data
+$PHP $DIRECTORY/bin/magento setup:install --admin-firstname="$MAGENTO_USERNAME" --admin-lastname="$MAGENTO_USERNAME" --admin-email="$MAGENTO_USER_EMAIL" --admin-user="$MAGENTO_USERNAME" --admin-password="$MAGENTO_PASSWORD" --base-url="http://$DOMAIN" --backend-frontname="$MAGENTO_ADMIN_URL" --db-host="localhost" --db-name="$MYSQL_DATABASE_NAME" --db-user="$MYSQL_USER" --db-password="$MYSQL_PASSWORD" --language=nl_NL --currency=EUR --timezone=Europe/Amsterdam --use-rewrites=1 --session-save=files --use-sample-data
 
-php $DIRECTORY/bin/magento setup:upgrade
+$PHP $DIRECTORY/bin/magento setup:upgrade
 
 ## Developer Settings
-php $DIRECTORY/bin/magento deploy:mode:set developer
-php $DIRECTORY/bin/magento cache:disable layout block_html collections full_page
+$PHP $DIRECTORY/bin/magento deploy:mode:set developer
+$PHP $DIRECTORY/bin/magento cache:disable layout block_html collections full_page
 ### Generated PhpStorm XML Schema Validation
-php $DIRECTORY/bin/magento dev:urn-catalog:generate .idea/misc.xml
+mkdir -p $DIRECTORY/.idea
+$PHP $DIRECTORY/bin/magento dev:urn-catalog:generate .idea/misc.xml
 
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'admin/security/session_lifetime', '31536000') ON DUPLICATE KEY UPDATE value='31536000';"
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'web/cookie/cookie_lifetime', '31536000') ON DUPLICATE KEY UPDATE value='31536000';"

@@ -9,6 +9,24 @@ Simply create Magento 2 Website on your localmachine!
 
 Make a copy of the config.sample.sh file and update according to your localmachine.
 
+### Different PHP Versions Support
+
+Magento 2.1 requires php7.0 but Magento 2.3 requires php7.1. To run both environments you have to create a switch in your NGINX but also in the installation.
+
+Set the PHP7 and COMPOSER_PHP7 variables in the config.sh.
+
+Additional information:
+
+ - Install Different PHP Versions see for Example for Ubuntu:
+        https://www.tecmint.com/install-different-php-versions-in-ubuntu/
+ - Make a Switch in NGINX
+    - Set the fastcgi_pass for Magento 2.1
+      - fastcgi_pass   unix:/var/run/php/php7.0-fpm.sock;
+    - Set the fastcgi_pass for Magento 2.3
+      - fastcgi_pass   unix:/var/run/php/php7.1-fpm.sock;
+ - **IMPORTANT: Magento 2.2 can fun on both php versions**
+
+### Use the simplified aliases
 Include .bash_xp in .bashrc or .bash_aliases, include example:
 
 ```
