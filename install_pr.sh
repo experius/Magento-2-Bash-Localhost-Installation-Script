@@ -47,9 +47,8 @@ fi
 
 ## Download Magento
 if [ "$EDITION" = "enterprise" ]; then
-  REMOTE="git@github.com:magento/magento2.git"
-  echo "please update the Enterprise Remote Url"
-  exit;
+  REMOTE="git@github.com:magento-partners/magento2ee.git"
+  FORKED_REPO=$FORKED_REPO_EE
 else
   REMOTE="git@github.com:magento/magento2.git"
 fi
