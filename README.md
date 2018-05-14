@@ -162,6 +162,9 @@ alias m2='magerun2'
 #### PHP aliases
 ```
 alias php7='php7.0'
+alias composer7='php7 /usr/bin/composer'
+alias php71='php7.1'
+alias composer71='php71 /usr/bin/composer'
 ```
 
 #### PhpStorm aliasses
