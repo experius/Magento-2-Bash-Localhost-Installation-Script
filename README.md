@@ -141,7 +141,16 @@ code_quality app/code/MyModule/Helloworld 7 fix
 Requires the following files to be in the destination domain folder: files.tar, structure.sql, data.sql
 
 ```
-import_website magento.localhost.com
+import_website name
+```
+
+### Update Website from Backup
+**This feature also supports update for a Magento 1 Webshop**
+
+Requires the following files to be in the destination domain folder: structure.sql, data.sql
+
+```
+update_website name
 ```
 
 ### Site Search Command

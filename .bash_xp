@@ -22,6 +22,10 @@ function import_website() {
     bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/import.sh $1
 }
 
+function update_website() {
+    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/update.sh $1
+}
+
 _site () 
 { 
     local cur=${COMP_WORDS[COMP_CWORD]};
