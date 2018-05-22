@@ -43,6 +43,7 @@ fi
  - [Update Modules](#update-modules)
  - [Code Quality Scan](#code-quality-scan)
  - [Site Search Command](#site-search-command)
+ - [Composer Lib Development](#composer-lib-development)
  - [Aliases](#aliases)
 
 
@@ -160,6 +161,24 @@ When you have installed your websites in ~/domains you can search through them w
 site <domain>
 ```
 
+### Composer Lib Development
+
+If you want to use the composer_lib_development command to make symbolic links for vendor modules follow the following steps:
+
+```
+1. sudo ln -s ~/tools/Magento-2-Bash-Localhost-Installation-Script/composer_lib_development /usr/local/bin/composer_lib_development
+2. sudo chmod +x /usr/local/bin/composer_lib_development
+
+```
+
+Now run the command from the Magento root:
+
+```
+composer_lib_development
+```
+
+*Additional Alias is `cld`
+
 
 ### Aliases
 #### Magerun aliasses
@@ -204,6 +223,12 @@ alias gpom='git push origin master'
 alias gm='git merge'
 alias gd='git diff'
 ```
+
+#### Composer Lib Development alias
+```
+alias cld='composer_lib_development'
+```
+
 
 #### Update Developer Programs Linux
 ```

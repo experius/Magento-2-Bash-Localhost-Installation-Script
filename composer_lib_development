@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+import argparse
+import sys
+import os
+import json
+import subprocess
+import shutil
+import collections
+
+class Command:
+
+        def __init__(self):
+                parser = argparse.ArgumentParser(
+                        description="Command for developing composer pacakges in lib folder",
+                        usage="""composer_lib_development <command> [<args>]
+
+Available commands:
+        init          Clone missing packages in lib folder
+        link          Symlink lib folder to composer
+        unlink        Remove symlink from composer and run composer install
+        status        Show GIT status for changed packages
+        versions      Show latest version 
+        no_versions   Show packages that has commits with no version
+
+composer_development.json:
+        {
+                "<pacakge name>": "<git url>",
+
+                # Example
+                "experius/module-missingtranslations": "git@github.com:experius/Magento-2-Module-Experius-MissingTranslations.git"
+        }
+                """)
+
+                parser.add_argument('command', help="Subcommand to run")
+
+                args = parser.parse_args(sys.argv[1:2])
+                if not hasattr(self, args.command):
+                        print("Unrecognized command")
+                        parser.print_help()
+                        sys.exit(1)
+
+                try:
+                        getattr(self, args.command)()
+                except Exception as e:
+                        print('ERROR: {}'.format(e))
+                        sys.exit(1)
+
+        def init(self):
+                # Clone missing packages
+                lib_path = os.path.join(os.getcwd(), 'lib')
+
+                if not os.path.isdir(lib_path):
+                        raise Exception('Could not find lib folder')
+
+                for name, giturl in self.get_packages().items():
+                        namespace, folder = name.split('/')
+                        package_libpath = os.path.join(lib_path, namespace, folder)
+
+                        if os.path.isdir(package_libpath):
+                                print('- Skipping {}, lib folder already exists'.format(name))
+                                continue
+
+                        try:
+                                os.makedirs(package_libpath)
+                                self.run_command(['git', 'clone', giturl, package_libpath])
+                                print('- Cloned {} to {}'.format(name, package_libpath))
+                        except Exception as e:
+                                print('- ERROR initing ({}): {}'.format(name, e))
+
+        def link(self):
+                # Symlink pacakges to composer folder
+                lib_path = os.path.join(os.getcwd(), 'lib')
+                vendor_path = os.path.join(os.getcwd(), 'vendor')
+
+                if not os.path.isdir(lib_path):
+                        raise Exception('Could not find lib folder')
+
+                if not os.path.isdir(vendor_path):
+                        raise Exception('Could not find vendor folder')
+
+                for name, giturl in self.get_packages().items():
+                        namespace, folder = name.split('/')
+                        package_libpath = os.path.join(lib_path, namespace, folder)
+                        package_vendor_path = os.path.join(vendor_path, namespace, folder)
+
+                        if not os.path.isdir(package_libpath):
+                                print("- Skipping {}, lib folder doesn't exists (run init first)".format(name))
+                                continue
+
+                        if not os.path.isdir(package_vendor_path):
+                                print("- Skipping {}, vendor folder doesn't exists (Add {} to compser and run composer update)".format(name, name))
+                                continue
+
+                        try:
+                                shutil.rmtree(package_vendor_path)
+                        except:
+                                pass
+
+                        try:
+                                os.unlink(package_vendor_path)
+                        except:
+                                pass
+
+                        try:
+                                os.symlink(package_libpath, package_vendor_path)
+                                print('- {} is linked to {}'.format(name, package_vendor_path))
+                        except Exception as e:
+                                print('- ERROR symlinking ({}): {}'.format(name, e))
+
+        def unlink(self):
+                # Remove symlinks from compser and run composer install
+                vendor_path = os.path.join(os.getcwd(), 'vendor')
+
+                for name, giturl in self.get_packages().items():
+                        namespace, folder = name.split('/')
+                        package_vendor_path = os.path.join(vendor_path, namespace, folder)
+
+                        try:
+                                os.unlink(package_vendor_path)
+                                print('- Unlink {}'.format(name))
+                        except:
+                                pass
+
+                print('\nRun Composer install\n')
+                self.run_command(['composer', 'install'])
+
+        def status(self):
+                for name, lib_path in self.get_lib_packages():
+                        status = self.run_command(['git', '-C', lib_path, 'status'])
+
+                        if 'nothing to commit' not in status:
+                                print()
+                                print('#' * 80)
+                                print(name)
+                                print('-' * 80)
+                                print(status)
+
+        def versions(self):
+                for name, lib_path in self.get_lib_packages():
+                        version = self.run_command(['git', '-C', lib_path, 'describe', '--abbrev=0', '--tags']).strip() 
+                        print("{}: {}".format(name, version))
+
+        def no_versions(self):
+                for name, lib_path in self.get_lib_packages():
+                        tags = self.run_command(['git', '-C', lib_path, 'tag', '--contains', 'HEAD']).strip() 
+                        if not tags:
+                                print(name)
+
+        def get_packages(self):
+                config_path = os.path.join(os.getcwd(), 'composer_development.json')
+                with open(config_path, encoding='utf-8') as config_file:
+                        data = json.load(config_file)
+                        if isinstance(data, dict):
+                                return collections.OrderedDict(sorted(data.items()))
+                        else:
+                                raise Exception('Could not load (composer_development.json), because json data is not of type `dict`')
+
+        def get_lib_packages(self):
+                lib_path = os.path.join(os.getcwd(), 'lib')
+
+                for name, giturl in self.get_packages().items():
+                        namespace, folder = name.split('/')
+                        yield name, os.path.join(lib_path, namespace, folder)
+
+        def run_command(self, command):
+                process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                out, err = process.communicate()
+
+                if process.returncode:
+                        raise Exception(err.decode('utf-8'))
+                return out.decode('utf-8')
+
+
+if __name__ == "__main__":
+        Command()
+
