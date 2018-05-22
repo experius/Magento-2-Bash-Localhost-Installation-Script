@@ -7,10 +7,17 @@ else
     . $SCRIPTPATH/config.sample.sh
 fi
 
-DOMAIN=$1
+NAME=$1
 
+if [ -z "$NAME" ]; then
+        echo "enter name. Will be used as  $DOMAIN_PREFIX<yourname>$DOMAIN_SUFFIX"
+        exit;
+fi
+
+DOMAIN=$DOMAIN_PREFIX$NAME$DOMAIN_SUFFIX
 DIRECTORY=$DOMAINS_PATH/$DOMAIN
-MYSQL_DATABASE_NAME=$DOMAIN
+MYSQL_DATABASE_NAME=$MYSQL_DATABASE_PREFIX$NAME
+
 URL="http://$DOMAIN"
 
 if [ ! -d "$DIRECTORY" ]; then
