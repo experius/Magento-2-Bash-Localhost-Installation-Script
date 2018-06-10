@@ -74,7 +74,7 @@ mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'system/smtp/disable', '1') ON DUPLICATE KEY UPDATE value='1';"
 
 ## Remove the import files
-rm $DIRECTORY/files.tar
+rm $DIRECTORY/files.tar.gz
 rm $DIRECTORY/structure.sql
 rm $DIRECTORY/data.sql
 
