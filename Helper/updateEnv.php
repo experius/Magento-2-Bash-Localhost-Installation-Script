@@ -6,6 +6,9 @@ $envFilePath = $config['f'] . '/app/etc/env.php';
 
 $envfileData = include $envFilePath;
 
+if (file_exists($config['f'] . '/app/connector_autoload.php')) {
+	include $config['f'] . '/app/connector_autoload.php';
+}
 include $config['f'] . '/vendor/autoload.php';
 
 if(isset($envfileData['cache'])) {
