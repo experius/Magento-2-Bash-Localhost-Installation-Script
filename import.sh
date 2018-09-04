@@ -47,6 +47,9 @@ if [ "$VERSION" = "m2" ]; then
 	php $SCRIPTPATH/Helper/updateEnv.php -f $DIRECTORY -d $MYSQL_DATABASE_NAME -u $MYSQL_USER -p $MYSQL_PASSWORD
 else
 	## Create new local.xml
+	if [ ! -d "$DIRECTORY"/app/etc/local.xml ]; then
+		touch $DIRECTORY/app/etc/local.xml
+	fi
 	php $SCRIPTPATH/Helper/updateLocal.php -f $DIRECTORY -d $MYSQL_DATABASE_NAME -u $MYSQL_USER -p $MYSQL_PASSWORD
 fi
 
