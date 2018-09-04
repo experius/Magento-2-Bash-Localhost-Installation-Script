@@ -62,7 +62,7 @@ else
     git clone -b $BRANCH $REMOTE $DIRECTORY
 fi
 git remote add fork $FORKED_REPO
-$COMPOSER install -d=$DIRECTORY
+$COMPOSER install -d $DIRECTORY
 
 ## Install Sample Data
 mkdir $DIRECTORY/var/composer_home
