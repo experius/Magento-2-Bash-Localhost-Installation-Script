@@ -33,3 +33,5 @@ FORKED_REPO="git@github.com:<username>/magento2.git"
 FORKED_REPO_EE="undefined"
 PHP7="php7.0"
 COMPOSER_PHP7="$PHP7 /usr/bin/composer"
+
+secure="false"
