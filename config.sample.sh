@@ -10,8 +10,15 @@ MAGENTO_MODULE_VENDOR="Vendor"
 
 DOMAINS_PATH="~/Documents/Development/Domains"
 
+## When Using Valet
+#DOMAIN_PREFIX="m2."
+#DOMAIN_SUFFIX=".test"
+#FOLDER_SUFFIX=""
+
+## When Using Custom (folder contains suffix)
 DOMAIN_PREFIX="magento2."
 DOMAIN_SUFFIX=".local.example.com"
+FOLDER_SUFFIX=".local.example.com"
 
 COMPOSER_AUTH_JSON_FILE_PATH="auth.json"
 

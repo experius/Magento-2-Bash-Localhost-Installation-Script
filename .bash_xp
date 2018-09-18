@@ -88,3 +88,29 @@ alias cld='composer_lib_development'
 
 # Update Developer Programs Linux
 alias update_postman='sudo rm -rf /opt/Postman/; wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz; sudo tar -xzf postman.tar.gz -C /opt; rm postman.tar.gz'
+
+
+
+# Custom prompt
+function parse_git_branch() { # Git Branch
+  BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  if [ ! "${BRANCH}" == "" ]
+  then
+    echo "[${BRANCH}]"
+  else
+    echo ""
+  fi
+}
+
+function parse_git_tag() { # Git Tag
+  TAG=`git describe --abbrev=0 --tags 2> /dev/null`
+  if [ ! "${TAG}" == "" ]
+  then
+    echo "[${TAG}]"
+  else
+    echo ""
+  fi
+}
+
+# PS1 Line
+PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h:\[\e[0m\]\[\e[0;31m\]\`parse_git_branch\`\[\e[m\]\[\e[0m\]\[\e[0;38m\]\`parse_git_tag\`\[\e[m\]\[\e[00;36m\][\w]\[\e[0m\]\[\e[00;32m\]\nbash> \[\e[0m\]"
