@@ -20,6 +20,8 @@ DOMAIN=$DOMAIN$DOMAIN_SUFFIX
 MYSQL_DATABASE_NAME=$MYSQL_DATABASE_PREFIX$NAME
 
 URL="http://$DOMAIN"
+if [ "$secure" = "true" ]; then
+        URL="https://$DOMAIN"
 
 if [ ! -d "$DIRECTORY" ]; then
         echo "Directory not found"
@@ -93,3 +95,6 @@ if [ "$VERSION" = "m2" ]; then
 else
 	$MAGERUN_COMMAND --root-dir=$DIRECTORY admin:user:create $MAGENTO_USERNAME $MAGENTO_USER_EMAIL $MAGENTO_PASSWORD $MAGENTO_USERNAME $MAGENTO_USERNAME
 fi
+
+if [ "$secure" = "true" ]; then
+        valet secure $DOMAIN
