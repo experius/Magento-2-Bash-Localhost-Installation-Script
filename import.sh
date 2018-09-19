@@ -21,7 +21,7 @@ MYSQL_DATABASE_NAME=$MYSQL_DATABASE_PREFIX$NAME
 
 URL="http://$DOMAIN"
 if [ "$secure" = "true" ]; then
-        URL="http://$DOMAIN"
+        URL="https://$DOMAIN"
 
 if [ ! -d "$DIRECTORY" ]; then
         echo "Directory not found"
