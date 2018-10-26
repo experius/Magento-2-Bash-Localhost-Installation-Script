@@ -22,7 +22,7 @@ MYSQL_DATABASE_NAME=$MYSQL_DATABASE_PREFIX$NAME
 URL="http://$DOMAIN"
 if [ "$secure" = "true" ]; then
         URL="https://$DOMAIN"
-
+fi
 if [ ! -d "$DIRECTORY" ]; then
         echo "Directory not found"
         exit;
@@ -98,3 +98,4 @@ fi
 
 if [ "$secure" = "true" ]; then
         valet secure $DOMAIN
+fi

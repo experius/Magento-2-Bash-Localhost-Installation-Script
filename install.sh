@@ -85,6 +85,7 @@ $PHP $DIRECTORY/bin/magento sampledata:deploy
 URL="http://$DOMAIN"
 if [ "$secure" = "true" ]; then
 	URL="https://$DOMAIN"
+fi
 $PHP $DIRECTORY/bin/magento setup:install --admin-firstname="$MAGENTO_USERNAME" --admin-lastname="$MAGENTO_USERNAME" --admin-email="$MAGENTO_USER_EMAIL" --admin-user="$MAGENTO_USERNAME" --admin-password="$MAGENTO_PASSWORD" --base-url="$URL" --backend-frontname="$MAGENTO_ADMIN_URL" --db-host="localhost" --db-name="$MYSQL_DATABASE_NAME" --db-user="$MYSQL_USER" --db-password="$MYSQL_PASSWORD" --language=nl_NL --currency=EUR --timezone=Europe/Amsterdam --use-rewrites=1 --session-save=files --use-sample-data 	
 
 $PHP $DIRECTORY/bin/magento setup:upgrade
@@ -109,3 +110,4 @@ mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`
 
 if [ "$secure" = "true" ]; then
 	valet secure $DOMAIN
+fi

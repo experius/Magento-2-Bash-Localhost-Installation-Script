@@ -22,7 +22,7 @@ MYSQL_DATABASE_NAME=$MYSQL_DATABASE_PREFIX$NAME
 URL="http://$DOMAIN"
 if [ "$secure" = "true" ]; then
         URL="https://$DOMAIN"
-
+fi
 if [ ! -d "$DIRECTORY" ]; then
         echo "Directory not found"
         exit;
@@ -32,7 +32,7 @@ fi
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -e "DROP DATABASE \`$MYSQL_DATABASE_NAME\`"
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -e "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE_NAME\`"
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE_NAME < $DIRECTORY/structure.sql
-mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE_NAME < $DIRECTORY/data.sql
+mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -f $MYSQL_DATABASE_NAME < $DIRECTORY/data.sql
 
 ## Check if we are installing Magento 1 or 2
 if [ -f "$DIRECTORY/app/etc/env.php" ]; then
@@ -87,3 +87,4 @@ fi
 
 if [ "$secure" = "true" ]; then
         valet secure $DOMAIN
+fi
