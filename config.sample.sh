@@ -35,3 +35,7 @@ PHP7="php7.0"
 COMPOSER_PHP7="$PHP7 /usr/bin/composer"
 
 secure="false"
+
+CUSTOM_EE="example/magento-project-enterprise-edition"
+CUSTOM_CE="example/magento-project-community-edition"
+CUSTOM_REPO="https://repo.example.com"

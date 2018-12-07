@@ -21,17 +21,17 @@ DOMAIN=$DOMAIN_PREFIX$NAME
 DIRECTORY=$DOMAINS_PATH/$DOMAIN$FOLDER_SUFFIX
 DOMAIN=$DOMAIN$DOMAIN_SUFFIX
 MYSQL_DATABASE_NAME=$MYSQL_DATABASE_PREFIX$NAME
-
-if [ -d "$DIRECTORY" ]; then
+MYSQL_DATABASE_NAME="${MYSQL_DATABASE_NAME//./_}"
+if [[ $EDITION != "custom-"* ]]; then
+    if [ -d "$DIRECTORY" ]; then
         echo "allready exists"
         exit;
+    fi
+    ## Create Webshop Directory
+    mkdir $DIRECTORY
 fi 
-	
 ## Create Database	
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -e "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE_NAME\`"
-
-## Create Webshop Directory
-mkdir $DIRECTORY
 
 COMPOSER="composer"
 PHP="php"
@@ -58,6 +58,16 @@ if [ "$EDITION" = "enterprise" ]; then
   $COMPOSER require 'magento/module-target-rule-sample-data'
   $COMPOSER require 'magento/module-gift-registry-sample-data'
   $COMPOSER require 'magento/module-multiple-wishlist-sample-data'
+elif [ "$EDITION" = "custom-enterprise" ]; then
+  V=$CUSTOM_EE
+  $COMPOSER config repositories.magento composer https://repo.magento.com/ --global
+  $COMPOSER config repositories.custom-enterprise composer $CUSTOM_REPO --global
+  $COMPOSER create-project $V $DIRECTORY $OPTIONS
+elif [ "$EDITION" = "custom-community" ]; then
+  V=$CUSTOM_CE
+  $COMPOSER config repositories.magento composer https://repo.magento.com/ --global
+  $COMPOSER config repositories.custom-community composer $CUSTOM_REPO --global
+  $COMPOSER create-project $V $DIRECTORY $OPTIONS
 else
   V="magento/project-community-edition"
   if [ "$VERSION" ]; then
