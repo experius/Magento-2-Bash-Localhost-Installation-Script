@@ -1,30 +1,34 @@
+XP_TOOLS_DIR="~/tools/Magento-2-Bash-Localhost-Installation-Script"
+
 function create_website() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/install.sh $1 $2 $3 $4
+    bash "$XP_TOOLS_DIR/install.sh" $1 $2 $3 $4
 }
 
 function create_pr_website() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/install_pr.sh $1 $2 $3 $4
+    bash "$XP_TOOLS_DIR/install_pr.sh" $1 $2 $3 $4
 }
 
 function add_module() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/add_module.sh $1 $2 $3
+    bash "$XP_TOOLS_DIR/add_module.sh" $1 $2 $3
 }
 
 function update_modules() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/update_modules.sh
+    bash "$XP_TOOLS_DIR/update_modules.sh"
 }
 
 function code_quality() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/code_quality.sh $1 $2 $3
+    bash "$XP_TOOLS_DIR/code_quality.sh" $1 $2 $3
 }
 
 function import_website() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/import.sh $1
+    bash "$XP_TOOLS_DIR/import.sh" $1
 }
 
 function update_website() {
-    bash ~/tools/Magento-2-Bash-Localhost-Installation-Script/update.sh $1
+    bash "$XP_TOOLS_DIR/update.sh" $1
 }
+
+source "$XP_TOOLS_DIR/environment_tools.sh"
 
 _site () 
 { 
@@ -89,7 +93,10 @@ alias cld='composer_lib_development'
 # Update Developer Programs Linux
 alias update_postman='sudo rm -rf /opt/Postman/; wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz; sudo tar -xzf postman.tar.gz -C /opt; rm postman.tar.gz'
 
-
+# Environment tools
+alias emnt=mount_site
+alias eumnt=umount_site
+alias edbg=debug_site
 
 # Custom prompt
 function parse_git_branch() { # Git Branch
