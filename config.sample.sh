@@ -8,7 +8,8 @@ MAGENTO_USER_EMAIL="sandbox@example.com"
 MAGENTO_ADMIN_URL="admin"
 MAGENTO_MODULE_VENDOR="Vendor"
 
-DOMAINS_PATH="~/Documents/Development/Domains"
+# No double quotes arount the path value for linux users
+DOMAINS_PATH=~/Documents/Development/Domains
 
 ## When Using Valet
 #DOMAIN_PREFIX="m2."
