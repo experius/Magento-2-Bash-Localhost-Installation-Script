@@ -3,9 +3,15 @@ PHPVERSION=$1
 # Function to install given php version
 function installPhpVersion
 {
+	# add repository for php7.0-fpm as it is not available by default anymore
+	if [[ "$PHPVERSION" =~ "7.0" ]]; then
+		echo 'Add extra repository for php7.0'
+		sudo apt-add-repository ppa:ondrej/php
+	fi
+
 	INSTALL_PHP_VERSION="php${PHPVERSION}-fpm"
 	echo "Install php: ${INSTALL_PHP_VERSION}"
-	sudo apt install $INSTALL_PHP_VERSION
+	sudo apt install -y $INSTALL_PHP_VERSION
 
 	installMagento2PhpModules 
 }
@@ -17,13 +23,13 @@ function installMagento2PhpModules
 	for EXTENSION in "${MAGENTO2_PHP_EXTENSIONS[@]}"
 	do
 		PHP_EXTENSION="php${PHPVERSION}-${EXTENSION}"
-	    sudo apt install $PHP_EXTENSION
+	    sudo apt install -y $PHP_EXTENSION
 	done
 
 	MAGENTO2_EXTENSIONS=("openssl" "libxml2")
 	for EXTENSION in "${MAGENTO2_EXTENSIONS[@]}"
 	do
-	    sudo apt install $EXTENSION
+	    sudo apt install -y $EXTENSION
 	done
 }
 	
