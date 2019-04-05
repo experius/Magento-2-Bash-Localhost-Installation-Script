@@ -7,7 +7,11 @@ Simply create Magento 2 Website on your localmachine!
 
 ## Getting Started
 
-Make a copy of the config.sample.sh file and update according to your localmachine.
+Clone this repository inside your home directory and name it:
+
+```Tools```
+
+Make a copy of the config.sample.sh file, rename it to config.sh and update according to your localmachine.
 
 ### Different PHP Versions Support
 
@@ -19,7 +23,10 @@ Additional information:
 
  - Install Different PHP Versions see for Example for Ubuntu:
         https://www.tecmint.com/install-different-php-versions-in-ubuntu/
- - Make a Switch in NGINX
+ - Alternative switch PHP version for Linux users:
+ 	- after installing different versions of php-fpm use the following command to switch php-version:
+ 		```phpswitch 7.0```
+ - Make a manual switch in NGINX
     - Set the fastcgi_pass for Magento 2.1
       - fastcgi_pass   unix:/var/run/php/php7.0-fpm.sock;
     - Set the fastcgi_pass for Magento 2.3
