@@ -9,7 +9,7 @@ Simply create Magento 2 Website on your localmachine!
 
 Clone this repository inside your home directory and name it:
 
-```Tools```
+```tools```
 
 Make a copy of the config.sample.sh file, rename it to config.sh and update according to your localmachine.
 
