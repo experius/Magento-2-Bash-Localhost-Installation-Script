@@ -40,3 +40,7 @@ secure="false"
 CUSTOM_EE="example/magento-project-enterprise-edition"
 CUSTOM_CE="example/magento-project-community-edition"
 CUSTOM_REPO="https://repo.example.com"
+
+EMNT_DEFAULT_SITE_MOUNT_DIR='~/domains'
+EMNT_DEFAULT_SITE_REMOTE_LOCATION_FORMAT='~/domains/$SITE_DOMAIN.$SITE_ENV_HOST'
+EMNT_DEFAULT_SITE_LOCAL_LOCATION_FORMAT='$SITE_DOMAIN'
