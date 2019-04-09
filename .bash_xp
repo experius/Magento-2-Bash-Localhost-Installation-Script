@@ -1,5 +1,9 @@
 XP_TOOLS_DIR="~/tools/Magento-2-Bash-Localhost-Installation-Script"
 
+function phpswitch() {
+    bash "$XP_TOOLS_DIR/phpswitch.sh" $1
+}
+
 function create_website() {
     bash "$XP_TOOLS_DIR/install.sh" $1 $2 $3 $4
 }

@@ -8,7 +8,8 @@ MAGENTO_USER_EMAIL="sandbox@example.com"
 MAGENTO_ADMIN_URL="admin"
 MAGENTO_MODULE_VENDOR="Vendor"
 
-DOMAINS_PATH="~/Documents/Development/Domains"
+# No double quotes arount the path value for linux users
+DOMAINS_PATH=~/domains
 
 ## When Using Valet
 #DOMAIN_PREFIX="m2."
@@ -23,8 +24,8 @@ FOLDER_SUFFIX=".local.example.com"
 COMPOSER_AUTH_JSON_FILE_PATH="auth.json"
 
 ##https://github.com/magento/marketplace-eqp
-PHPCS_PATH="~/Documents/Development/magento-coding-standard/vendor/bin/phpcs"
-PHPCBF_PATH="~/Documents/Development/magento-coding-standard/vendor/bin/phpcbf"
+PHPCS_PATH="~/tools/magento-coding-standard/vendor/bin/phpcs"
+PHPCBF_PATH="~/tools/magento-coding-standard/vendor/bin/phpcbf"
 
 MAGERUN2_COMMAND="n98-magerun2"
 MAGERUN1_COMMAND="n98-magerun"
