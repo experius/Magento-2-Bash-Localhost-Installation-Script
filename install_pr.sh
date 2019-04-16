@@ -17,9 +17,9 @@ if [ -z "$NAME" ]; then
 	exit;
 fi
 
-DOMAIN=$DOMAIN_PREFIX$NAME              
-DIRECTORY=$DOMAINS_PATH/$DOMAIN$FOLDER_SUFFIX
-DOMAIN=$DOMAIN$DOMAIN_SUFFIX
+VALET_DOMAIN=$DOMAIN_PREFIX$NAME
+DIRECTORY=$DOMAINS_PATH/$VALET_DOMAIN$FOLDER_SUFFIX
+DOMAIN=$VALET_DOMAIN$DOMAIN_SUFFIX
 MYSQL_DATABASE_NAME=$MYSQL_DATABASE_PREFIX$NAME
 
 if [ -d "$DIRECTORY" ]; then
@@ -104,5 +104,5 @@ mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'emailcatcher/general/smtp_disable', '1') ON DUPLICATE KEY UPDATE value='1';"
 
 if [ "$secure" = "true" ]; then
-        valet secure $DOMAIN
+        valet secure $VALET_DOMAIN
 fi
