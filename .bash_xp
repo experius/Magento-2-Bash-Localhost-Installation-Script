@@ -1,4 +1,4 @@
-XP_TOOLS_DIR="~/tools/Magento-2-Bash-Localhost-Installation-Script"
+XP_TOOLS_DIR=~/tools/Magento-2-Bash-Localhost-Installation-Script
 
 function phpswitch() {
     bash "$XP_TOOLS_DIR/phpswitch.sh" $1
