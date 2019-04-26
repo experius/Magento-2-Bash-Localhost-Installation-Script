@@ -7,6 +7,17 @@ else
     . $SCRIPTPATH/config.sample.sh
 fi
 
+if [ "$1" = "--help" ] || [ "$1" = "-h" ] ; then
+  echo "The options available for this command:
+        create_website 1 2 3 4
+        1: The name of the website
+        2: Type: community or enterprise
+        3: Version: Set the magento version being installed. Example 2.2.8
+        4: options: add options to the composer create project commando"
+  exit 0
+fi
+
+
 NAME=$1
 EDITION=$2
 VERSION=$3
