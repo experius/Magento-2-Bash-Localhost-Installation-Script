@@ -32,6 +32,11 @@ function update_website() {
     bash "$XP_TOOLS_DIR/update.sh" $1
 }
 
+function update_website() {
+    bash "$XP_TOOLS_DIR/git_import.sh" $1
+}
+
+
 source "$XP_TOOLS_DIR/environment_tools.sh"
 
 _site () 

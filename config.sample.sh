@@ -44,3 +44,6 @@ CUSTOM_REPO="https://repo.example.com"
 EMNT_DEFAULT_SITE_MOUNT_DIR='~/domains'
 EMNT_DEFAULT_SITE_REMOTE_LOCATION_FORMAT='~/domains/$SITE_DOMAIN.$SITE_ENV_HOST'
 EMNT_DEFAULT_SITE_LOCAL_LOCATION_FORMAT='$SITE_DOMAIN'
+
+## name of your bitbucket vendor git@bitbucker.org:[VENDOR]/[MODULE]
+GIR_REPO_VENDOR='example'

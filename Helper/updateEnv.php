@@ -30,5 +30,3 @@ $phpFormatter = new  Magento\Framework\App\DeploymentConfig\Writer\PhpFormatter;
 $newEnvFileData = $phpFormatter->format($envfileData);
 
 file_put_contents($envFilePath, $newEnvFileData);
-
-?>
