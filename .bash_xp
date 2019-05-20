@@ -32,8 +32,8 @@ function update_website() {
     bash "$XP_TOOLS_DIR/update.sh" $1
 }
 
-function update_website() {
-    bash "$XP_TOOLS_DIR/git_import.sh" $1
+function git_import_website() {
+    bash "$XP_TOOLS_DIR/git_import.sh" $1 $2
 }
 
 
