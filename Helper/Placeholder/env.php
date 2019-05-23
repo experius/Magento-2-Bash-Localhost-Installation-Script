@@ -1,7 +1,7 @@
 <?php
 return [
     'backend' => [
-        'frontName' => 'admin_x6q4uh'
+        'frontName' => 'admin_valet'
     ],
     'db' => [
         'connection' => [

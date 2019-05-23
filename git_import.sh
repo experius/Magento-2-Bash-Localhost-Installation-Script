@@ -50,8 +50,8 @@ if [ -f "$DIRECTORY/app/Mage.php" ]; then
         VERSION="m1"
         MAGERUN_COMMAND=$MAGERUN1_COMMAND
 else
-		VERSION="m2"
-		MAGERUN_COMMAND=$MAGERUN2_COMMAND
+	VERSION="m2"
+	MAGERUN_COMMAND=$MAGERUN2_COMMAND
 fi
 
 ## Create and import DB
@@ -68,9 +68,7 @@ if [ "$VERSION" = "m2" ]; then
 	$MAGERUN_COMMAND --root-dir=$DIRECTORY module:enable --all
 else
 	## Create new local.xml
-	if [ ! -d "$DIRECTORY"/app/etc/local.xml ]; then
-		touch $DIRECTORY/app/etc/local.xml
-	fi
+	cp $SCRIPTPATH/Helper/Placeholder/local.xml $DIRECTORY/app/etc/local.xml
 	php $SCRIPTPATH/Helper/updateLocal.php -f$DIRECTORY -d$MYSQL_DATABASE_NAME -u$MYSQL_USER -p$MYSQL_PASSWORD
 fi
 
