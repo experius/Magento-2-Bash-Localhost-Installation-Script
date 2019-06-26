@@ -32,6 +32,11 @@ function update_website() {
     bash "$XP_TOOLS_DIR/update.sh" $1
 }
 
+function git_import_website() {
+    bash "$XP_TOOLS_DIR/git_import.sh" $1 $2
+}
+
+
 source "$XP_TOOLS_DIR/environment_tools.sh"
 
 _site () 
@@ -61,6 +66,10 @@ bind '"\e[B": history-search-forward'
 # Magerun aliasses
 alias m='magerun'
 alias m2='magerun2'
+alias c='php bin/connector'
+alias cf='vendor/bin/cache-clean.js'
+alias b='php bin/magento'
+alias s='php bin/console'
 
 # PHP aliasses
 alias php7='php7.0'
@@ -76,6 +85,12 @@ alias phpx='XDEBUG_CONFIG="idekey=PHPSTORM" php  -dxdebug.remote_enable=on -f'
 alias xphp='XDEBUG_CONFIG="idekey=PHPSTORM" php  -dxdebug.remote_enable=on -f'
 alias phpx7='XDEBUG_CONFIG="idekey=PHPSTORM" php7.0  -dxdebug.remote_enable=on -f'
 alias xphp7='XDEBUG_CONFIG="idekey=PHPSTORM" php7.0  -dxdebug.remote_enable=on -f'
+alias xb='phpx bin/magento'
+alias bx='phpx bin/magento'
+alias xc='phpx bin/connector'
+alias cx='phpx bin/connector'
+alias sx='phpx bin/console'
+alias xs='phpx bin/console'
 
 # Git aliasses
 alias gs='git status'
