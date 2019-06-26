@@ -8,10 +8,17 @@ else
     . $SCRIPTPATH/config.sample.sh
 fi
 
+if [ "$1" = "--help" ] || [ "$1" = "-h" ] ; then
+  echo "The reset_admin_user_login allows the reset of the admin password for a domain.
+	Usage: reset_admin_user_login DOMAIN_TO_RESET_ADMIN"
+  exit 0
+fi
+
+
 NAME=$1
 
 if [ -z "$NAME" ]; then
-        echo "enter name. Will be used as  $DOMAIN_PREFIX<yourname>$DOMAIN_SUFFIX"
+        echo "Please enter a Domain where the admin user should be resetted"
         exit;
 fi
 
