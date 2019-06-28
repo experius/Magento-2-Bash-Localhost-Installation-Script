@@ -156,9 +156,15 @@ import_website name
 **This feature also supports update for a Magento 1 Webshop**
 
 Requires the following files to be in the destination domain folder: structure.sql, data.sql
+```
+import_website name
+```
+
+### Update/reset admin user
+**This feature also supports Magento 1 Webshops**
 
 ```
-update_website name
+reset_admin_user_login name
 ```
 
 ### Site Search Command
