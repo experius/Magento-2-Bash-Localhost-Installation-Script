@@ -37,7 +37,7 @@ function git_import_website() {
 }
 
 
-source "$XP_TOOLS_DIR/environment_tools.sh"
+#source "$XP_TOOLS_DIR/environment_tools.sh"
 
 _site () 
 { 
