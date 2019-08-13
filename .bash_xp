@@ -8,6 +8,10 @@ function create_website() {
     bash "$XP_TOOLS_DIR/install.sh" $1 $2 $3 $4
 }
 
+function init_cloud() {
+    bash "$XP_TOOLS_DIR/init_cloud.sh" $1 $2
+}
+
 function create_pr_website() {
     bash "$XP_TOOLS_DIR/install_pr.sh" $1 $2 $3 $4
 }
@@ -39,14 +43,14 @@ function git_import_website() {
 
 #source "$XP_TOOLS_DIR/environment_tools.sh"
 
-_site () 
-{ 
+_site ()
+{
     local cur=${COMP_WORDS[COMP_CWORD]};
     COMPREPLY=($(compgen -W "$(ls ~/domains)" -- $cur))
 }
 
-site () 
-{ 
+site ()
+{
     if [ $# -eq 0 ]; then
         DOMAIN=`pwd | cut --delimiter="/" -f 5`;
     else
@@ -66,6 +70,7 @@ bind '"\e[B": history-search-forward'
 # Magerun aliasses
 alias m='magerun'
 alias m2='magerun2'
+alias mc='magento-cloud'
 alias c='php bin/connector'
 alias cf='vendor/bin/cache-clean.js'
 alias b='php bin/magento'
