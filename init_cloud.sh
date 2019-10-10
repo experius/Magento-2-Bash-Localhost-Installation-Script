@@ -105,7 +105,7 @@ if [ "$secure" = "true" ]; then
 	valet secure $VALET_DOMAIN
 fi
 
-if [ "$nfs" = "true"]; then
+if [ "$nfs" = "true" ]; then
   echo "START - NFS"
   if [ "$cache" = "redis"]; then
     echo "configuring redis"

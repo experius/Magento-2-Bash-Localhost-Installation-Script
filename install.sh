@@ -136,7 +136,7 @@ if [ "$secure" = "true" ]; then
 fi
 
 
-if [ "$nfs" = "true"]; then
+if [ "$nfs" = "true" ]; then
   echo "START - NFS"
   if [ "$cache" = "redis"]; then
     echo "configuring redis"

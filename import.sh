@@ -85,9 +85,9 @@ mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'emailcatcher/general/smtp_disable', '1') ON DUPLICATE KEY UPDATE value='1';"
 
 ## Remove the import files
-rm $DIRECTORY/files.tar.gz
-rm $DIRECTORY/structure.sql
-rm $DIRECTORY/data.sql
+#rm $DIRECTORY/files.tar.gz
+#rm $DIRECTORY/structure.sql
+#rm $DIRECTORY/data.sql
 
 ## Delete Current Admin User and Create New Admin User
 $MAGERUN_COMMAND --root-dir=$DIRECTORY admin:user:delete $MAGENTO_USERNAME -f
@@ -102,7 +102,7 @@ if [ "$secure" = "true" ]; then
         valet secure $VALET_DOMAIN
 fi
 
-if [ "$nfs" = "true"]; then
+if [ "$nfs" = "true" ]; then
   echo "START - NFS"
   if [ "$cache" = "redis"]; then
     echo "configuring redis"
