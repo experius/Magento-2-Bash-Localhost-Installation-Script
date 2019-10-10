@@ -43,8 +43,8 @@ if [ -f "$DIRECTORY/app/etc/env.php" ]; then
         MAGERUN_COMMAND=$MAGERUN2_COMMAND
 else
 		VERSION="m1"
-		MAGERUN_COMMAND=$MAGERUN1_COMMAND        
-fi 
+		MAGERUN_COMMAND=$MAGERUN1_COMMAND
+fi
 
 if [ "$VERSION" = "m2" ]; then
 	## Create new env.php
@@ -65,6 +65,7 @@ done
 
 ## Developer Settings
 php $DIRECTORY/bin/magento deploy:mode:set developer
+$PHP $DIRECTORY/bin/magento cache:enable
 php $DIRECTORY/bin/magento cache:disable layout block_html collections full_page
 
 ### Generated PhpStorm XML Schema Validation

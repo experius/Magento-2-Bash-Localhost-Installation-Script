@@ -64,6 +64,7 @@ if [ "$VERSION" = "m2" ]; then
 	mkdir -p $DIRECTORY/app/etc
 	cp $SCRIPTPATH/Helper/Placeholder/env.php $DIRECTORY/app/etc
 	composer install -d$DIRECTORY
+	rm $DIRECTORY/var/.regenerate
 	php $SCRIPTPATH/Helper/updateEnv.php -f$DIRECTORY -d$MYSQL_DATABASE_NAME -u$MYSQL_USER -p$MYSQL_PASSWORD
 	$MAGERUN_COMMAND --root-dir=$DIRECTORY module:enable --all
 else
@@ -80,6 +81,7 @@ done
 
 ## Developer Settings
 php $DIRECTORY/bin/magento deploy:mode:set developer
+$PHP $DIRECTORY/bin/magento cache:enable
 php $DIRECTORY/bin/magento cache:disable layout block_html collections full_page
 
 ### Generated PhpStorm XML Schema Validation
