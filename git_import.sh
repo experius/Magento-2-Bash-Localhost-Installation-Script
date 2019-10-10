@@ -65,12 +65,12 @@ if [ "$VERSION" = "m2" ]; then
 	cp $SCRIPTPATH/Helper/Placeholder/env.php $DIRECTORY/app/etc
 	composer install -d$DIRECTORY
 	rm $DIRECTORY/var/.regenerate
-	php $SCRIPTPATH/Helper/updateEnv.php -f$DIRECTORY -d$MYSQL_DATABASE_NAME -u$MYSQL_USER -p$MYSQL_PASSWORD
+	$PHP $SCRIPTPATH/Helper/updateEnv.php -f$DIRECTORY -d$MYSQL_DATABASE_NAME -u$MYSQL_USER -p$MYSQL_PASSWORD
 	$MAGERUN_COMMAND --root-dir=$DIRECTORY module:enable --all
 else
 	## Create new local.xml
 	cp $SCRIPTPATH/Helper/Placeholder/local.xml $DIRECTORY/app/etc/local.xml
-	php $SCRIPTPATH/Helper/updateLocal.php -f$DIRECTORY -d$MYSQL_DATABASE_NAME -u$MYSQL_USER -p$MYSQL_PASSWORD
+	$PHP $SCRIPTPATH/Helper/updateLocal.php -f$DIRECTORY -d$MYSQL_DATABASE_NAME -u$MYSQL_USER -p$MYSQL_PASSWORD
 fi
 
 ## Set correct base urls
@@ -80,13 +80,13 @@ do
 done
 
 ## Developer Settings
-php $DIRECTORY/bin/magento deploy:mode:set developer
+$PHP $DIRECTORY/bin/magento deploy:mode:set developer
 $PHP $DIRECTORY/bin/magento cache:enable
-php $DIRECTORY/bin/magento cache:disable layout block_html collections full_page
+$PHP $DIRECTORY/bin/magento cache:disable layout block_html collections full_page
 
 ### Generated PhpStorm XML Schema Validation
 mkdir -p $DIRECTORY/.idea
-php $DIRECTORY/bin/magento dev:urn-catalog:generate $DIRECTORY/.idea/misc.xml
+$PHP $DIRECTORY/bin/magento dev:urn-catalog:generate $DIRECTORY/.idea/misc.xml
 
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'admin/security/session_lifetime', '31536000') ON DUPLICATE KEY UPDATE value='31536000';"
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'web/cookie/cookie_lifetime', '31536000') ON DUPLICATE KEY UPDATE value='31536000';"
