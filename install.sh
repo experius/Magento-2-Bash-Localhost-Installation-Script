@@ -138,7 +138,7 @@ fi
 
 if [ "$nfs" = "true" ]; then
   echo "START - NFS"
-  if [ "$cache" = "redis"]; then
+  if [ "$cache" = "redis" ]; then
     echo "configuring redis"
     valet redis on
     $PHP $DIRECTORY/bin/magento setup:config:set --cache-backend=redis --cache-backend-redis-server=127.0.0.1 --cache-backend-redis-db=0
