@@ -19,7 +19,7 @@ Available commands:
         link          Symlink lib folder to composer
         unlink        Remove symlink from composer and run composer install
         status        Show GIT status for changed packages
-        versions      Show latest version 
+        versions      Show latest version
         no_versions   Show packages that has commits with no version
 
 composer_development.json:
@@ -123,6 +123,7 @@ composer_development.json:
 
                 print('\nRun Composer install\n')
                 self.run_command(['composer', 'install'])
+                self.run_command(['rm', 'var/.regenerate']
 
         def status(self):
                 for name, lib_path in self.get_lib_packages():
@@ -137,12 +138,12 @@ composer_development.json:
 
         def versions(self):
                 for name, lib_path in self.get_lib_packages():
-                        version = self.run_command(['git', '-C', lib_path, 'describe', '--abbrev=0', '--tags']).strip() 
+                        version = self.run_command(['git', '-C', lib_path, 'describe', '--abbrev=0', '--tags']).strip()
                         print("{}: {}".format(name, version))
 
         def no_versions(self):
                 for name, lib_path in self.get_lib_packages():
-                        tags = self.run_command(['git', '-C', lib_path, 'tag', '--contains', 'HEAD']).strip() 
+                        tags = self.run_command(['git', '-C', lib_path, 'tag', '--contains', 'HEAD']).strip()
                         if not tags:
                                 print(name)
 

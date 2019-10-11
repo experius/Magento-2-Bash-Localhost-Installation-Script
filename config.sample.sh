@@ -48,3 +48,6 @@ EMNT_DEFAULT_SITE_LOCAL_LOCATION_FORMAT='$SITE_DOMAIN'
 
 ## name of your bitbucket vendor git@bitbucker.org:[VENDOR]/[MODULE]
 GIT_REPO_VENDOR='example'
+
+nfs="true"
+cache="redis"
