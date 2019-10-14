@@ -123,7 +123,7 @@ composer_development.json:
 
                 print('\nRun Composer install\n')
                 self.run_command(['composer', 'install'])
-                self.run_command(['rm', 'var/.regenerate']
+                self.run_command(['rm', 'var/.regenerate'])
 
         def status(self):
                 for name, lib_path in self.get_lib_packages():
