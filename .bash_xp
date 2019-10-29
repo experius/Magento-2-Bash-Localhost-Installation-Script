@@ -43,6 +43,47 @@ function git_import_website() {
 
 #source "$XP_TOOLS_DIR/environment_tools.sh"
 
+toggle_xdebug()
+{
+    if [ "$experius_valet" = "true" ]; then
+        if [ -f /etc/php/7.2/fpm/conf.d/z-performance.ini ]; then
+            disable_xdebug()
+        else
+            enable_xdebug()
+        fi
+    fi
+}
+
+enable_xdebug ()
+{
+    sudo ln -s ~/.composer/vendor/cpriego/valet-linux/cli/stubs/z-performance.ini /etc/php/7.3/fpm/conf.d/z-performance.ini
+    sudo service php7.3-fpm reload
+
+    sudo ln -s ~/.composer/vendor/cpriego/valet-linux/cli/stubs/z-performance.ini /etc/php/7.2/fpm/conf.d/z-performance.ini
+    sudo service php7.2-fpm reload
+
+    sudo ln -s ~/.composer/vendor/cpriego/valet-linux/cli/stubs/z-performance.ini /etc/php/7.1/fpm/conf.d/z-performance.ini
+    sudo service php7.1-fpm reload
+
+    sudo ln -s ~/.composer/vendor/cpriego/valet-linux/cli/stubs/z-performance.ini /etc/php/7.0/fpm/conf.d/z-performance.ini
+    sudo service php7.0-fpm reload
+}
+
+disable_xdebug ()
+{
+    sudo unlink /etc/php/7.3/fpm/conf.d/z-performance.ini
+    sudo service php7.3-fpm reload
+
+    sudo unlink /etc/php/7.2/fpm/conf.d/z-performance.ini
+    sudo service php7.2-fpm reload
+
+    sudo unlink /etc/php/7.1/fpm/conf.d/z-performance.ini
+    sudo service php7.1-fpm reload
+
+    sudo unlink /etc/php/7.0/fpm/conf.d/z-performance.ini
+    sudo service php7.0-fpm reload
+}
+
 _site ()
 {
     local cur=${COMP_WORDS[COMP_CWORD]};
