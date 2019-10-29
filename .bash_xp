@@ -45,12 +45,10 @@ function git_import_website() {
 
 toggle_xdebug()
 {
-    if [ "$experius_valet" = "true" ]; then
-        if [ -f /etc/php/7.2/fpm/conf.d/z-performance.ini ]; then
-            disable_xdebug()
-        else
-            enable_xdebug()
-        fi
+    if [ -f "/etc/php/7.2/fpm/conf.d/z-performance.ini" ]; then
+        disable_xdebug
+    else
+        enable_xdebug
     fi
 }
 

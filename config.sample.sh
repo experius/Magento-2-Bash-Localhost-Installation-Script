@@ -52,4 +52,3 @@ GIT_REPO_VENDOR='example'
 nfs="true"
 cache="redis"
 xdebug="true"
-experius_valet="true"
