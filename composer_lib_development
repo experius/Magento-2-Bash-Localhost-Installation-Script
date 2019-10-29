@@ -24,7 +24,7 @@ Available commands:
 
 composer_development.json:
         {
-                "<pacakge name>": "<git url>",
+                "<package name>": "<git url>",
 
                 # Example
                 "experius/module-missingtranslations": "git@github.com:experius/Magento-2-Module-Experius-MissingTranslations.git"
