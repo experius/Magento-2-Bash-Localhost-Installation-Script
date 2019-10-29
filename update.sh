@@ -120,7 +120,9 @@ if [ "$nfs" = "true" ]; then
   mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'experius_api_logger/general/enabled_rest', '0') ON DUPLICATE KEY UPDATE value='0';"
   mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'experius_api_logger/general/enabled_soap', '0') ON DUPLICATE KEY UPDATE value='0';"
 
-  echo "disable remote_autostart xdebug"
-  valet xdebug on --remote_autostart=0
+  if [ "$xdebug" = "true" ]; then
+    echo "disable remote_autostart xdebug"
+    valet xdebug on --remote_autostart=0
+  fi
   echo "END - NFS"
 fi
