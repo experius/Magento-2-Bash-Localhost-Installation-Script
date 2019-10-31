@@ -138,7 +138,7 @@ fi
 
 if [ "$nfs" = "true" ]; then
   echo "START - NFS"
-  if [ "$cache" = "redis" ]; then
+  if [ "$cache" = "redis" ] && [ "$valet" = "plus" ]; then
     echo "configuring redis"
     valet redis on
     $PHP $DIRECTORY/bin/magento setup:config:set --cache-backend=redis --cache-backend-redis-server=127.0.0.1 --cache-backend-redis-db=0
@@ -166,7 +166,7 @@ if [ "$nfs" = "true" ]; then
   mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'experius_api_logger/general/enabled_rest', '0') ON DUPLICATE KEY UPDATE value='0';"
   mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'experius_api_logger/general/enabled_soap', '0') ON DUPLICATE KEY UPDATE value='0';"
 
-  if [ "$xdebug" = "true" ]; then
+  if [ "$xdebug" = "true" ] && [ "$valet" = "plus" ]; then
     echo "disable remote_autostart xdebug"
     valet xdebug on --remote_autostart=0
   fi
