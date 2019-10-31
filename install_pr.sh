@@ -24,7 +24,7 @@ MYSQL_DATABASE_NAME=$MYSQL_DATABASE_PREFIX$NAME
 MYSQL_DATABASE_NAME="${MYSQL_DATABASE_NAME//./_}"
 
 if [ -d "$DIRECTORY" ]; then
-        echo "allready exists"
+        echo "already exists"
         exit;
 fi
 
