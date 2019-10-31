@@ -35,7 +35,7 @@ MYSQL_DATABASE_NAME=$MYSQL_DATABASE_PREFIX$NAME
 MYSQL_DATABASE_NAME="${MYSQL_DATABASE_NAME//./_}"
 if [[ $EDITION != "custom-"* ]]; then
     if [ -d "$DIRECTORY" ]; then
-        echo "allready exists"
+        echo "already exists"
         exit;
     fi
 fi
@@ -77,7 +77,7 @@ fi
 rm -rf $DIRECTORY/generated/*
 rm -rf $DIRECTORY/var/cache/*
 
-$PHP $DIRECTORY/bin/magento setup:install --admin-firstname="$MAGENTO_USERNAME" --admin-lastname="$MAGENTO_USERNAME" --admin-email="$MAGENTO_USER_EMAIL" --admin-user="$MAGENTO_USERNAME" --admin-password="$MAGENTO_PASSWORD" --base-url="$URL" --backend-frontname="$MAGENTO_ADMIN_URL" --db-host="localhost" --db-name="$MYSQL_DATABASE_NAME" --db-user="$MYSQL_USER" --db-password="$MYSQL_PASSWORD" --language=nl_NL --currency=EUR --timezone=Europe/Amsterdam --use-rewrites=1 --session-save=files
+$PHP $DIRECTORY/bin/magento setup:install --admin-firstname="$MAGENTO_USERNAME" --admin-lastname="$MAGENTO_USERNAME" --admin-email="$MAGENTO_USER_EMAIL" --admin-user="$MAGENTO_USERNAME" --admin-password="$MAGENTO_PASSWORD" --base-url="$URL" --backend-frontname="$MAGENTO_ADMIN_URL" --db-host="127.0.0.1" --db-name="$MYSQL_DATABASE_NAME" --db-user="$MYSQL_USER" --db-password="$MYSQL_PASSWORD" --language=nl_NL --currency=EUR --timezone=Europe/Amsterdam --use-rewrites=1 --session-save=files
 
 $PHP $DIRECTORY/bin/magento setup:upgrade
 
