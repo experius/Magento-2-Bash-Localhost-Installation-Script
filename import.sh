@@ -19,11 +19,6 @@ DIRECTORY=$DOMAINS_PATH/$VALET_DOMAIN$FOLDER_SUFFIX
 DOMAIN=$VALET_DOMAIN$DOMAIN_SUFFIX
 MYSQL_DATABASE_NAME=$MYSQL_DATABASE_PREFIX$NAME
 MYSQL_DATABASE_NAME="${MYSQL_DATABASE_NAME//./_}"
-
-URL="http://$DOMAIN"
-if [ "$secure" = "true" ]; then
-        URL="https://$DOMAIN"
-fi
 if [ ! -d "$DIRECTORY" ]; then
         echo "Directory not found"
         exit;
@@ -58,11 +53,22 @@ else
 fi
 
 ## Set correct base urls
-for CONFIG_PATH in 'web/unsecure/base_url' 'web/secure/base_url' 'web/unsecure/base_link_url' 'web/secure/base_link_url'
+echo "starting with making urls and adding the symbolic links"
+URL="http://"
+if [ "$secure" = "true" ]; then
+        URL="https://"
+fi
+mysql -N -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "SELECT * FROM \`core_config_data\` where \`path\` IN ('web/unsecure/base_url','web/secure/base_url','web/unsecure/base_link_url','web/secure/base_link_url')" | while read config_id scope scope_id path value;
 do
-	mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "UPDATE \`core_config_data\` SET \`value\`='$URL/' WHERE \`path\`='$CONFIG_PATH'"
-done
+	Stript=${value#*//}
+	for suffix in "${STRIPURLS[@]}"; do
+		Stript=${Stript%.$suffix*};
+	done
 
+	ln -s $DIRECTORY $DOMAINS_PATH/$Stript
+	mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "UPDATE \`core_config_data\` SET \`value\` ='$URL$Stript$DOMAIN_SUFFIX' WHERE config_id = $config_id"
+	echo "updated url for $Stript"
+done
 ## Developer Settings
 php $DIRECTORY/bin/magento deploy:mode:set developer
 $PHP $DIRECTORY/bin/magento cache:enable

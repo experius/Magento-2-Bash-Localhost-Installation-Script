@@ -16,6 +16,10 @@ DOMAINS_PATH=~/domains
 #DOMAIN_SUFFIX=".test"
 #FOLDER_SUFFIX=""
 
+
+## STRIP URL if YOU use A copy from a develop Envirement For example test.com.dev.nl makes with STRIPURL=("dev") : test.com. this is used for the symlinks and suport multidomains.
+#STRIPURLS is filled with a arrar like STRIPURLS=("suffix1" "suffix2" "suffix3")
+#STRIPURLS=()
 ## When Using Custom (folder contains suffix)
 DOMAIN_PREFIX="magento2."
 DOMAIN_SUFFIX=".local.example.com"
