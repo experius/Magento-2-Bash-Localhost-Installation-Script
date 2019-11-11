@@ -145,3 +145,13 @@ function parse_git_tag() { # Git Tag
 
 # PS1 Line
 PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h:\[\e[0m\]\[\e[0;31m\]\`parse_git_branch\`\[\e[m\]\[\e[0m\]\[\e[0;38m\]\`parse_git_tag\`\[\e[m\]\[\e[00;36m\][\w]\[\e[0m\]\[\e[00;32m\]\nbash> \[\e[0m\]"
+
+# Create a SSH connection, go to a directory and creates a tar.gz with the contents found
+tar_ssh_pipe ()
+{
+    if [ $# -eq 3 ]; then
+        ssh $1  "cd $2 && tar -cf - * | gzip -9" > $3.tar.gz
+    else
+        echo "No host, directory path and filename specified"
+    fi;
+}
