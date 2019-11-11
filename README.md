@@ -52,6 +52,7 @@ fi
  - [Site Search Command](#site-search-command)
  - [Composer Lib Development](#composer-lib-development)
  - [Aliases](#aliases)
+ - [Githooks](#githooks)
 
 
 
@@ -242,3 +243,10 @@ alias cld='composer_lib_development'
 alias update_postman='sudo rm -rf /opt/Postman/; wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz; sudo tar -xzf postman.tar.gz -C /opt; rm postman.tar.gz'
 ```
 
+### Githooks
+Added a simple pre-push githook to generate a CHANGELOG.md based on git version tags.
+
+Start using the githooks of this repository by running the following command:
+```
+git config --global core.hooksPath ~/tools/Magento-2-Bash-Localhost-Installation-Script/githooks
+```
