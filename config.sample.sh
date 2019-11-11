@@ -41,6 +41,9 @@ PHP7="php7.0"
 COMPOSER_PHP7="$PHP7 /usr/bin/composer"
 
 secure="false"
+## Valet Plus has valet link function.
+VALET_LINK="false"
+
 
 CUSTOM_EE="example/magento-project-enterprise-edition"
 CUSTOM_CE="example/magento-project-community-edition"

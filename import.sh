@@ -60,14 +60,25 @@ if [ "$secure" = "true" ]; then
 fi
 mysql -N -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "SELECT * FROM \`core_config_data\` where \`path\` IN ('web/unsecure/base_url','web/secure/base_url','web/unsecure/base_link_url','web/secure/base_link_url')" | while read config_id scope scope_id path value;
 do
-	Stript=${value#*//}
-	for suffix in "${STRIPURLS[@]}"; do
-		Stript=${Stript%.$suffix*};
+	STRIPT=${value#*//}
+	STRIPT="${STRIPT/www\./}"
+	STRIPT="${STRIPT/\/$/}"
+	for SUFFIX in "${STRIPURLS[@]}"; do
+		STRIPT=${STRIPT%.$SUFFIX*};
 	done
 
-	ln -s $DIRECTORY $DOMAINS_PATH/$Stript
-	mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "UPDATE \`core_config_data\` SET \`value\` ='$URL$Stript$DOMAIN_SUFFIX' WHERE config_id = $config_id"
-	echo "updated url for $Stript"
+  if [ "$VALET_LINK" = "true" ]; then
+    cd $DIRECTORY
+    if [ "$secure" = "true" ]; then
+      valet link $STRIPT --secure
+    else
+      valet link $STRIPT
+    fi
+  else
+	  ln -s $DIRECTORY $DOMAINS_PATH/$STRIPT
+  fi
+	mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "UPDATE \`core_config_data\` SET \`value\` ='$URL$STRIPT$DOMAIN_SUFFIX/' WHERE config_id = $config_id"
+	echo "updated url for $STRIPT"
 done
 ## Developer Settings
 php $DIRECTORY/bin/magento deploy:mode:set developer
