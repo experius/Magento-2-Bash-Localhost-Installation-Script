@@ -1,3 +1,10 @@
+## 1.2.0 (2019-11-12)
+
+[View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/1.2.0)
+
+*  [FEATURE] Added check to only update the CHANGELOG.md for the master branch
+
+
 ## 1.1.0 (2019-11-11)
 
 [View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/1.1.0)
