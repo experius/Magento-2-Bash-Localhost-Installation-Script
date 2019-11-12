@@ -1,3 +1,10 @@
+## 1.2.1 (2019-11-12)
+
+[View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/1.2.1)
+
+*  [BUGFIX] Added missing char ')'
+
+
 ## 1.2.0 (2019-11-12)
 
 [View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/1.2.0)
@@ -12,7 +19,7 @@
 *  [FEATURE] Added githooks support to generate CHANGELOG.md automatically
 
 
-## 1.0.0 (2019-11-11
+## 1.0.0 (2019-11-11)
 
 [View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/1.0.0)
 
