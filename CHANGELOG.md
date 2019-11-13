@@ -1,3 +1,17 @@
+## 2.2.0 (2019-11-13)
+
+[View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.2.0)
+
+*  [FEATURE] Set default strip domain hypernode.io *(Lewis Voncken)*
+
+
+## 2.1.0 (2019-11-13)
+
+[View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.1.0)
+
+*  [TASK] - Add valet distinction for commands unavailable to valet-linux *(Lewis Voncken)*
+
+
 ## 2.0.0 (2019-11-13)
 
 [View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.0.0)
