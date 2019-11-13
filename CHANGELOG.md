@@ -1,3 +1,10 @@
+## 2.0.0 (2019-11-13)
+
+[View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.0.0)
+
+*  [REFACTOR] Use generic includes *(Lewis Voncken)*
+
+
 ## 1.4.0 (2019-11-13)
 
 [View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/1.4.0)
