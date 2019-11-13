@@ -1,6 +1,74 @@
-#!/usr/bin/env bash
+#!/bin/sh
+YELLOW='\033[0;33m'
+GREEN='\033[0;32m'
+BLUE='\033[0;36m'
+RED='\033[0;31m'
+NC='\033[0m'
 if [ $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,') != 'master' ]; then
     exit 0;
 fi
-{ bitbucket_url=$(git remote get-url --push origin); bitbucket_url="${bitbucket_url/git\@bitbucket\.org\:$GIT_REPO_VENDOR/https://bitbucket.org/$GIT_REPO_VENDOR}"; previous_tag=0 ; for current_tag in $(git tag --sort=-creatordate); do if [ "$previous_tag" != 0 ]; then     tag_date=$(git log -1 --pretty=format:'%ad' --date=short ${previous_tag});     printf "## ${previous_tag} (${tag_date})\n\n[View Release](${bitbucket_url}/commits/tag/${previous_tag})\n\n";     git log ${current_tag}...${previous_tag} --pretty=format:"*  %s" --reverse | grep -v Merge;     printf "\n\n"; fi; previous_tag=${current_tag}; done ; previous_tag=$(git tag --sort=-creatordate | tail -n 1); tag_date=$(git log -1 --pretty=format:'%ad' --date=short ${previous_tag}); printf "## ${previous_tag} (${tag_date})\n\n[View Release](${bitbucket_url}/commits/tag/${previous_tag})\n\n"; git log ${previous_tag} --pretty=format:"*  %s" --reverse | grep -v Merge; printf "\n\n"; } > CHANGELOG.md
-if [ $(git status --porcelain | grep CHANGELOG.md | wc -l) -gt 0 ]; then  latest_tag=$(git tag --sort=creatordate | tail -n 1); git add CHANGELOG.md; git tag -d  $latest_tag ; git commit --amend --no-edit; git tag $latest_tag ; git push origin master --tags; echo 'The CHANGELOG.md has been updated and pushed to the remote and added to the latest tag.'; exit 1; fi
+# If we have a STDIN, use it, otherwise get one
+if tty >/dev/null 2>&1; then
+    TTY=$(tty)
+else
+    TTY=/dev/tty
+fi
+
+IFS=$'\n'
+
+# http://djm.me/ask
+ask() {
+    while true; do
+
+        if [ "${2:-}" = "Y" ]; then
+            prompt="Y/n"
+            default=Y
+        elif [ "${2:-}" = "N" ]; then
+            prompt="y/N"
+            default=N
+        else
+            prompt="y/n"
+            default=
+        fi
+
+        # Ask the question (not using "read -p" as it uses stderr not stdout)
+        echo "${BLUE}$1${NC} [$prompt]"
+
+        # Read the answer
+        read REPLY < "$TTY"
+
+        # Default?
+        if [ -z "$REPLY" ]; then
+            REPLY=$default
+        fi
+
+        # Check if the reply is valid
+        case "$REPLY" in
+            Y*|y*) return 0 ;;
+            N*|n*) return 1 ;;
+        esac
+
+    done
+}
+{ bitbucket_url=$(git remote get-url --push origin); bitbucket_url="${bitbucket_url/git\@bitbucket\.org\:$GIT_REPO_VENDOR/https://bitbucket.org/$GIT_REPO_VENDOR}"; previous_tag=0 ; for current_tag in $(git tag --sort=-creatordate); do if [ "$previous_tag" != 0 ]; then     tag_date=$(git log -1 --pretty=format:'%ad' --date=short ${previous_tag});     printf "## ${previous_tag} (${tag_date})\n\n[View Release](${bitbucket_url}/commits/tag/${previous_tag})\n\n";     git log ${current_tag}...${previous_tag} --pretty=format:"*  %s *(%an)*" --reverse | grep -v Merge;     printf "\n\n"; fi; previous_tag=${current_tag}; done ; previous_tag=$(git tag --sort=-creatordate | tail -n 1); tag_date=$(git log -1 --pretty=format:'%ad' --date=short ${previous_tag}); printf "## ${previous_tag} (${tag_date})\n\n[View Release](${bitbucket_url}/commits/tag/${previous_tag})\n\n"; git log ${previous_tag} --pretty=format:"*  %s *(%an)*" --reverse | grep -v Merge; printf "\n\n"; } > CHANGELOG.md
+if [ $(git status --porcelain | grep CHANGELOG.md | wc -l) -gt 0 ]; then
+    latest_tag=$(git tag --sort=creatordate | tail -n 1);
+    if ask "Do want to update the CHANGELOG.md according to version ${latest_tag}?" Y; then
+        git add CHANGELOG.md;
+        git tag -d  $latest_tag ;
+        git commit --amend --no-edit;
+        git tag $latest_tag;
+        git push origin master --tags;
+        if [ $? -eq 0 ]
+        then
+            echo "${GREEN}SUCCESS${NC} - The CHANGELOG.md has been updated and pushed to the remote and added to the latest tag.";
+            echo "${YELLOW}NOTICE${NC} - Please ignore the error below.";
+        else
+          echo "${RED}ERROR${NC} - Something went wrong while updating the CHANGELOG.md"
+        fi
+        exit 1;
+    else
+        echo "${YELLOW}NOTICE${NC} - Skip updating the CHANGELOG.md";
+        git checkout CHANGELOG.md;
+    fi
+fi
