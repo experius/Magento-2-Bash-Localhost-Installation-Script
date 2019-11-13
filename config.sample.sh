@@ -59,3 +59,4 @@ GIT_REPO_VENDOR='example'
 nfs="true"
 cache="redis"
 xdebug="true"
+valet="linux"
