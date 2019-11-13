@@ -4,6 +4,7 @@ GREEN='\033[0;32m'
 BLUE='\033[0;36m'
 RED='\033[0;31m'
 NC='\033[0m'
+
 if [ $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,') != 'master' ]; then
     exit 0;
 fi
@@ -55,9 +56,14 @@ if [ $(git status --porcelain | grep CHANGELOG.md | wc -l) -gt 0 ]; then
     latest_tag=$(git tag --sort=creatordate | tail -n 1);
     if ask "Do want to update the CHANGELOG.md according to version ${latest_tag}?" Y; then
         git add CHANGELOG.md;
-        git tag -d  $latest_tag ;
-        git commit --amend --no-edit;
-        git tag $latest_tag;
+        if [ "$(git ls-remote origin refs/tags/${latest_tag})" == '' ]; then
+            git tag -d  $latest_tag ;
+            git commit --amend --no-edit;
+            git tag $latest_tag;
+        else
+            git commit -m "[DOCS] Updated the CHANGELOG.md"
+            echo "${YELLOW}NOTICE${NC} - The update of the CHANGELOG.md has been added to a separate commit.";
+        fi
         git push origin master --tags;
         if [ $? -eq 0 ]
         then

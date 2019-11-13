@@ -1,3 +1,10 @@
+## 1.4.0 (2019-11-13)
+
+[View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/1.4.0)
+
+*  [FEATURE] Check if tag exists on remote then commit the CHANGELOG.md update in a separate commit *(Lewis Voncken)*
+
+
 ## 1.3.0 (2019-11-13)
 
 [View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/1.3.0)
