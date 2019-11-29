@@ -1,3 +1,10 @@
+## 2.2.1 (2019-11-29)
+
+[View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.2.1)
+
+*  [BUGFIX] Solved problem with different remote and commit which is already pushed to the remote *(Lewis Voncken)*
+
+
 ## 2.2.0 (2019-11-13)
 
 [View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.2.0)

@@ -17,6 +17,8 @@ fi
 
 IFS=$'\n'
 
+remote="$1"
+
 # http://djm.me/ask
 ask() {
     while true; do
@@ -51,12 +53,12 @@ ask() {
 
     done
 }
-{ bitbucket_url=$(git remote get-url --push origin); bitbucket_url="${bitbucket_url/git\@bitbucket\.org\:$GIT_REPO_VENDOR/https://bitbucket.org/$GIT_REPO_VENDOR}"; previous_tag=0 ; for current_tag in $(git tag --sort=-creatordate); do if [ "$previous_tag" != 0 ]; then     tag_date=$(git log -1 --pretty=format:'%ad' --date=short ${previous_tag});     printf "## ${previous_tag} (${tag_date})\n\n[View Release](${bitbucket_url}/commits/tag/${previous_tag})\n\n";     git log ${current_tag}...${previous_tag} --pretty=format:"*  %s *(%an)*" --reverse | grep -v Merge;     printf "\n\n"; fi; previous_tag=${current_tag}; done ; previous_tag=$(git tag --sort=-creatordate | tail -n 1); tag_date=$(git log -1 --pretty=format:'%ad' --date=short ${previous_tag}); printf "## ${previous_tag} (${tag_date})\n\n[View Release](${bitbucket_url}/commits/tag/${previous_tag})\n\n"; git log ${previous_tag} --pretty=format:"*  %s *(%an)*" --reverse | grep -v Merge; printf "\n\n"; } > CHANGELOG.md
+{ bitbucket_url=$(git remote get-url --push ${remote}); bitbucket_url="${bitbucket_url/git\@bitbucket\.org\:$GIT_REPO_VENDOR/https://bitbucket.org/$GIT_REPO_VENDOR}"; previous_tag=0 ; for current_tag in $(git tag --sort=-creatordate); do if [ "$previous_tag" != 0 ]; then     tag_date=$(git log -1 --pretty=format:'%ad' --date=short ${previous_tag});     printf "## ${previous_tag} (${tag_date})\n\n[View Release](${bitbucket_url}/commits/tag/${previous_tag})\n\n";     git log ${current_tag}...${previous_tag} --pretty=format:"*  %s *(%an)*" --reverse | grep -v Merge;     printf "\n\n"; fi; previous_tag=${current_tag}; done ; previous_tag=$(git tag --sort=-creatordate | tail -n 1); tag_date=$(git log -1 --pretty=format:'%ad' --date=short ${previous_tag}); printf "## ${previous_tag} (${tag_date})\n\n[View Release](${bitbucket_url}/commits/tag/${previous_tag})\n\n"; git log ${previous_tag} --pretty=format:"*  %s *(%an)*" --reverse | grep -v Merge; printf "\n\n"; } > CHANGELOG.md
 if [ $(git status --porcelain | grep CHANGELOG.md | wc -l) -gt 0 ]; then
     latest_tag=$(git tag --sort=creatordate | tail -n 1);
     if ask "Do want to update the CHANGELOG.md according to version ${latest_tag}?" Y; then
         git add CHANGELOG.md;
-        if [ "$(git ls-remote origin refs/tags/${latest_tag})" == '' ]; then
+        if [ "$(git ls-remote ${remote} refs/tags/${latest_tag})" == '' ] && ["$(git log ${remote}/master..master)" == '']; then
             git tag -d  $latest_tag ;
             git commit --amend --no-edit;
             git tag $latest_tag;
@@ -64,7 +66,7 @@ if [ $(git status --porcelain | grep CHANGELOG.md | wc -l) -gt 0 ]; then
             git commit -m "[DOCS] Updated the CHANGELOG.md"
             echo "${YELLOW}NOTICE${NC} - The update of the CHANGELOG.md has been added to a separate commit.";
         fi
-        git push origin master --tags;
+        git push ${remote} master --tags;
         if [ $? -eq 0 ]
         then
             echo "${GREEN}SUCCESS${NC} - The CHANGELOG.md has been updated and pushed to the remote and added to the latest tag.";
