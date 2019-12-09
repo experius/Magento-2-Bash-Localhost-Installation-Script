@@ -1,3 +1,10 @@
+## 2.2.4 (2019-12-09)
+
+[View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.2.4)
+
+*  [BUGFIX] Solved missing colors *(Lewis Voncken)*
+
+
 ## 2.2.3 (2019-12-09)
 
 [View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.2.3)
