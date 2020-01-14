@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 YELLOW='\033[0;33m'
 GREEN='\033[0;32m'
 BLUE='\033[0;36m'
@@ -71,22 +71,22 @@ if [ $(git status --porcelain | grep CHANGELOG.md | wc -l) -gt 0 ]; then
             git tag -d  $latest_tag > /dev/null 2>&1;
             git commit --amend --no-edit > /dev/null 2>&1;
             git tag $latest_tag;
-            echo "${YELLOW}NOTICE${NC} - The update of the CHANGELOG.md has been added to your commit.";
+            printf "${YELLOW}NOTICE${NC} - The update of the CHANGELOG.md has been added to your commit.\n";
         else
             git commit -m "[DOCS] Updated the CHANGELOG.md" > /dev/null 2>&1;
-            echo "${YELLOW}NOTICE${NC} - The update of the CHANGELOG.md has been added to a separate commit.";
+            printf "${YELLOW}NOTICE${NC} - The update of the CHANGELOG.md has been added to a separate commit.\n";
         fi
         git push ${remote} master --tags;
         if [ $? -eq 0 ]
         then
-            echo "${GREEN}SUCCESS${NC} - The CHANGELOG.md has been updated and pushed to the remote.";
-            echo "${YELLOW}NOTICE${NC} - Please ignore the error below.";
+            printf "${GREEN}SUCCESS${NC} - The CHANGELOG.md has been updated and pushed to the remote.\n";
+            printf "${YELLOW}NOTICE${NC} - Please ignore the error below.\n";
         else
-          echo "${RED}ERROR${NC} - Something went wrong while updating the CHANGELOG.md"
+          printf "${RED}ERROR${NC} - Something went wrong while updating the CHANGELOG.md\n"
         fi
         exit 1;
     else
-        echo "${YELLOW}NOTICE${NC} - Skip updating the CHANGELOG.md";
+        printf "${YELLOW}NOTICE${NC} - Skip updating the CHANGELOG.md\n";
         git checkout CHANGELOG.md;
     fi
 fi
