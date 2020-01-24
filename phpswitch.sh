@@ -66,14 +66,9 @@ sudo update-alternatives --set php /usr/bin/php$PHPVERSION
 
 echo "Update composer config to the new php version and update all global packages to be compatible with this php version..."
 composer global config platform.php $PHPVERSION
-rm -rf ~/.composer/vendor/*
-composer global update
 
-echo "Remove valet socket configuration file..."
-rm -f ~/.valet/valet.sock
-
-echo "Reinstall valet using the new php settings..."
-valet install
+echo "restarting valet..."
+valet restart
 
 CURRENT_PHP_VERSION=$(php -v)
 echo "Currently running on PHP: ${CURRENT_PHP_VERSION}"
