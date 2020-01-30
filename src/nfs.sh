@@ -7,7 +7,7 @@ if [ "$nfs" = "true" ]; then
     $PHP $DIRECTORY/bin/magento setup:config:set --page-cache=redis --page-cache-redis-server=127.0.0.1 --page-cache-redis-db=1
   fi
   echo "installing mage2tv/magento-cache-clean (can be used as cf --watch - see https://github.com/mage2tv/magento-cache-clean for more information)"
-  $COMPOSER require --dev mage2tv/cache-clean --working-dir=$DIRECTORY
+  $COMPOSER require --dev mage2tv/magento-cache-clean --working-dir=$DIRECTORY
 
   echo "enabling all caches because mage2tv/magento-cache-clean is now available"
   $PHP $DIRECTORY/bin/magento cache:enable
