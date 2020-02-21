@@ -128,6 +128,6 @@ if [ -z "$BITBUCKET_SECRET" ]; then
 fi
 
 echo "Setting up bitbucket integration"
-$MC_COMMAND project:curl -p $PROJECT \/integrations -i -X POST -d '{"type": "bitbucket","repository": "'$BITBUCKET_REPO'","app_credentials": {"key": "'$BITBUCKET_KEY'","secret": "'$BITBUCKET_SECRET'"},"prune_branches": true,"fetch_branches": true,"build_pull_requests": true,"resync_pull_requests": true}'
+$MC_COMMAND project:curl -p $PROJECT \/integrations -i -X POST -d '{"type": "bitbucket","repository": "'$BITBUCKET_REPO'","app_credentials": {"key": "'$BITBUCKET_KEY'","secret": "'$BITBUCKET_SECRET'"},"prune_branches": false,"fetch_branches": true,"build_pull_requests": true,"resync_pull_requests": true}'
 exit;
 # Bitbucket END
