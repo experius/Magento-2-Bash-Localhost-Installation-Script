@@ -13,7 +13,7 @@ function init_cloud_project() {
 }
 
 function init_cloud_env() {
-    bash $XP_TOOLS_DIR/init_cloud_env.sh" $1 $2
+    bash "$XP_TOOLS_DIR/init_cloud_env.sh" $1 $2
 }
 
 function create_pr_website() {
