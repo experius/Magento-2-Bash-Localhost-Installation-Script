@@ -8,8 +8,12 @@ function create_website() {
     bash "$XP_TOOLS_DIR/install.sh" $1 $2 $3 $4
 }
 
-function init_cloud() {
-    bash "$XP_TOOLS_DIR/init_cloud.sh" $1 $2
+function init_cloud_project() {
+    bash "$XP_TOOLS_DIR/init_cloud_project.sh" $1 $2
+}
+
+function init_cloud_env() {
+    bash $XP_TOOLS_DIR/init_cloud_env.sh" $1 $2
 }
 
 function create_pr_website() {

@@ -8,7 +8,7 @@ else
 fi
 
 $MC_COMMAND auth:info
-$MC_COMMAND ssh-key:add --yes
+## $MC_COMMAND ssh-key:add --yes
 
 if [ "$1" = "--help" ] || [ "$1" = "-h" ] ; then
   echo "The options available for this command:
@@ -117,7 +117,7 @@ if [ -z "$BITBUCKET_KEY" ]; then
   fi
 fi
 
-echo Fill in the bitbucket oauth-consumer-key - https://devdocs.magento.com/guides/v2.3/cloud/integrations/bitbucket-integration.html#create-an-oauth-consumer
+echo Fill in the bitbucket oauth-consumer=secret-key - https://devdocs.magento.com/guides/v2.3/cloud/integrations/bitbucket-integration.html#create-an-oauth-consumer
 read BITBUCKET_SECRET
 if [ -z "$BITBUCKET_SECRET" ]; then
   echo You forgot to fill in the bitbucket oauth-consumer-secret, please fill it in
