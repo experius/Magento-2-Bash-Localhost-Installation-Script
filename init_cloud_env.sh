@@ -95,39 +95,3 @@ $PHP $DIRECTORY/bin/magento dev:urn-catalog:generate $DIRECTORY/.idea/misc.xml
 . $SCRIPTPATH/src/secure_domain.sh
 
 . $SCRIPTPATH/src/nfs.sh
-
-
-# Bitbucket START
-echo Fill in the bitbucket repository name like teamname/reponame
-read BITBUCKET_REPO
-if [ -z "$BITBUCKET_REPO" ]; then
-  echo You forgot to fill in the bitbucket repository URL, please fill it in like teamname/reponame
-  read BITBUCKET_REPO
-  if [ -z "$BITBUCKET_REPO"]; then
-    echo Bitbucket Integration Skipped because no bitbucket repository URL was given
-  fi
-fi
-echo Fill in the bitbucket oauth-consumer-key - https://devdocs.magento.com/guides/v2.3/cloud/integrations/bitbucket-integration.html#create-an-oauth-consumer
-read BITBUCKET_KEY
-if [ -z "$BITBUCKET_KEY" ]; then
-  echo You forgot to fill in the bitbucket oauth-consumer-key, please fill it in
-  read BITBUCKET_KEY
-  if [ -z "$BITBUCKET_KEY"]; then
-    echo Bitbucket Integration Skipped because no bitbucket oauth-consumer-key was given
-  fi
-fi
-
-echo Fill in the bitbucket oauth-consumer-key - https://devdocs.magento.com/guides/v2.3/cloud/integrations/bitbucket-integration.html#create-an-oauth-consumer
-read BITBUCKET_SECRET
-if [ -z "$BITBUCKET_SECRET" ]; then
-  echo You forgot to fill in the bitbucket oauth-consumer-secret, please fill it in
-  read BITBUCKET_SECRET
-  if [ -z "$BITBUCKET_SECRET"]; then
-    echo Bitbucket Integration Skipped because no bitbucket oauth-consumer-secret was given
-  fi
-fi
-
-echo "Setting up bitbucket integration"
-$MC_COMMAND project:curl -p $PROJECT \/integrations -i -X POST -d '{"type": "bitbucket","repository": "'$BITBUCKET_REPO'","app_credentials": {"key": "'$BITBUCKET_KEY'","secret": "'$BITBUCKET_SECRET'"},"prune_branches": true,"fetch_branches": true,"build_pull_requests": true,"resync_pull_requests": true}'
-exit;
-# Bitbucket END
