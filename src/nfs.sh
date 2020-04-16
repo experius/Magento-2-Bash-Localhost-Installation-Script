@@ -21,8 +21,8 @@ if [ "$nfs" = "true" ]; then
   echo "cleaning up the var/log folder"
   rm $DIRECTORY/var/log/*
 
-  echo "set index to schedule"
-  $PHP $DIRECTORY/bin/magento index:set-mode schedule
+  echo "set index to save/realtime because live has this on schedule"
+  $PHP $DIRECTORY/bin/magento index:set-mode realtime
 
   echo "disable Experius_ApiLogger"
   mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "INSERT INTO \`core_config_data\` (\`scope\`, \`scope_id\`, \`path\`, \`value\`) VALUES ('default', 0, 'experius_api_logger/general/enabled_rest', '0') ON DUPLICATE KEY UPDATE value='0';"

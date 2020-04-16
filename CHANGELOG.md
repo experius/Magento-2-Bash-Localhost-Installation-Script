@@ -1,3 +1,17 @@
+## 2.3.0 (2020-04-16)
+
+[View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.3.0)
+
+*  [BUGFIX] Prevent removing all composer installed packages and just restart valet *(Mr. Lewis)*
+*  [BUGFIX] Fixed composer installation command for mage2tv/magento-cache-clean module *(Basvanderlouw)*
+*  [BUGFIX] - Prevent Bitbucket integration setup from deleting environments when branches are missing (i.e. production / staging / integration) *(Cas Satter)*
+*  [FEATURE] - Renamed init_cloud command to indicate it's for setting up the project, also created command to setup a local environment of said project *(Cas Satter)*
+*  [BUGFIX] - PHPStorm removed "" instead " :-( *(Cas Satter)*
+*  [BUGFIX] - Restore ssh-keys add commando *(Cas Satter)*
+*  [BUGFIX] - Add $ to MC_COMMAND *(Cas Satter)*
+*  [TASK] Set index to on save for local development becasue on live its set to on schedule *(Lewis Voncken)*
+
+
 ## 2.2.4 (2019-12-09)
 
 [View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.2.4)
