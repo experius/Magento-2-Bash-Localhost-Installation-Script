@@ -84,6 +84,7 @@ done
 php $DIRECTORY/bin/magento deploy:mode:set developer
 $PHP $DIRECTORY/bin/magento cache:enable
 php $DIRECTORY/bin/magento cache:disable layout block_html collections full_page
+php $DIRECTORY/bin/magento indexer:set-mode realtime
 
 ### Generated PhpStorm XML Schema Validation
 mkdir -p $DIRECTORY/.idea
