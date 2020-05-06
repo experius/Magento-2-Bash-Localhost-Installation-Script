@@ -44,6 +44,9 @@ function git_import_website() {
     bash "$XP_TOOLS_DIR/git_import.sh" $1 $2
 }
 
+function replace_images() {
+    bash "$XP_TOOLS_DIR/replace_images.sh" $1
+}
 
 #source "$XP_TOOLS_DIR/environment_tools.sh"
 
