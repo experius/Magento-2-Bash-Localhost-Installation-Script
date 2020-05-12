@@ -36,12 +36,12 @@ mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE_NAME < $DIRECTORY/structur
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -f $MYSQL_DATABASE_NAME < $DIRECTORY/data.sql
 
 ## Check if we are installing Magento 1 or 2
-if [ -f "$DIRECTORY/app/etc/env.php" ]; then
-        VERSION="m2"
-        MAGERUN_COMMAND=$MAGERUN2_COMMAND
+if [ -f "$DIRECTORY/app/etc/local.xml" ]; then
+        VERSION="m1"
+        MAGERUN_COMMAND=$MAGERUN1_COMMAND
 else
-	VERSION="m1"
-	MAGERUN_COMMAND=$MAGERUN1_COMMAND
+	VERSION="m2"
+	MAGERUN_COMMAND=$MAGERUN2_COMMAND
 fi
 
 if [ "$VERSION" = "m2" ]; then
