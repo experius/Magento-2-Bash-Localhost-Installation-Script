@@ -92,6 +92,16 @@ create_website example
 create_website example enterprise
 ```
 
+##### Magento Cloud Example:
+
+```
+init_cloud_env project_id example develop
+```
+
+```
+init_cloud_project project_id example
+```
+
 ### Add Module
 
 ```
