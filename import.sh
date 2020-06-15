@@ -58,7 +58,7 @@ URL="http://"
 if [ "$secure" = "true" ]; then
         URL="https://"
 fi
-mysql -N -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "SELECT * FROM \`core_config_data\` where \`path\` IN ('web/unsecure/base_url','web/secure/base_url','web/unsecure/base_link_url','web/secure/base_link_url')" | while read config_id scope scope_id path value;
+mysql -N -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "SELECT \`config_id\`,\`scope\`,\`scope_id\`,\`path\`,\`value\` FROM \`core_config_data\` where \`path\` IN ('web/unsecure/base_url','web/secure/base_url','web/unsecure/base_link_url','web/secure/base_link_url')" | while read config_id scope scope_id path value;
 do
 	STRIPT=${value#*//}
 	STRIPT="${STRIPT/www\./}"
