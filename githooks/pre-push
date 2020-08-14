@@ -4,9 +4,12 @@ GREEN='\033[0;32m'
 BLUE='\033[0;36m'
 RED='\033[0;31m'
 NC='\033[0m'
+branch="$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')"
 
-if [ $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,') != 'master' ]; then
-    exit 0;
+if [ $branch != 'master' ]; then
+    if [ $branch != 'production' ]; then
+      exit 0;
+    fi
 fi
 # If we have a STDIN, use it, otherwise get one
 if tty >/dev/null 2>&1; then
@@ -59,10 +62,10 @@ if [ $(git status --porcelain | grep CHANGELOG.md | wc -l) -gt 0 ]; then
     latest_tag=$(git tag --sort=creatordate | tail -n 1);
     if ask "Do want to update the CHANGELOG.md according to version ${latest_tag}?" Y; then
         git add CHANGELOG.md;
-        git log ${remote}/master..master > /dev/null 2>&1;
-        if [ $? -ne 0 ] && [ "$(git ls-remote ${remote} refs/heads/master)" != "" ]; then
-            git fetch ${remote} master
-            STATUS="$(git log ${remote}/master..master)"
+        git log ${remote}/${branch}..${branch} > /dev/null 2>&1;
+        if [ $? -ne 0 ] && [ "$(git ls-remote ${remote} refs/heads/${branch})" != "" ]; then
+            git fetch ${remote} ${branch}
+            STATUS="$(git log ${remote}/${branch}..${branch})"
         else
             STATUS="new-branch"
         fi
@@ -76,7 +79,7 @@ if [ $(git status --porcelain | grep CHANGELOG.md | wc -l) -gt 0 ]; then
             git commit -m "[DOCS] Updated the CHANGELOG.md" > /dev/null 2>&1;
             printf "${YELLOW}NOTICE${NC} - The update of the CHANGELOG.md has been added to a separate commit.\n";
         fi
-        git push ${remote} master --tags;
+        git push ${remote} ${branch} --tags;
         if [ $? -eq 0 ]
         then
             printf "${GREEN}SUCCESS${NC} - The CHANGELOG.md has been updated and pushed to the remote.\n";
