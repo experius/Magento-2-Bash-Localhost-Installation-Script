@@ -6,12 +6,6 @@ if [ "$nfs" = "true" ]; then
     $PHP $DIRECTORY/bin/magento setup:config:set --cache-backend=redis --cache-backend-redis-server=127.0.0.1 --cache-backend-redis-db=0
     $PHP $DIRECTORY/bin/magento setup:config:set --page-cache=redis --page-cache-redis-server=127.0.0.1 --page-cache-redis-db=1
   fi
-  echo "installing mage2tv/magento-cache-clean (can be used as cf --watch - see https://github.com/mage2tv/magento-cache-clean for more information)"
-  $COMPOSER require --dev mage2tv/magento-cache-clean --working-dir=$DIRECTORY
-
-  echo "enabling all caches because mage2tv/magento-cache-clean is now available"
-  $PHP $DIRECTORY/bin/magento cache:enable
-
   echo "removing ui bookmarks to prevent page size of 100+ in Admin"
   mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "TRUNCATE ui_bookmark;"
 
@@ -32,5 +26,7 @@ if [ "$nfs" = "true" ]; then
     echo "disable remote_autostart xdebug"
     valet xdebug on --remote_autostart=0
   fi
+
+  echo "IMPORTANT: please install mage2tv/magento-cache-clean global with composer so you are able to enable all caches"
   echo "END - NFS"
 fi

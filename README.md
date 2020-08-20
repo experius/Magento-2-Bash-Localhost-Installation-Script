@@ -260,3 +260,12 @@ Start using the githooks of this repository by running the following command:
 ```
 git config --global core.hooksPath ~/tools/Magento-2-Bash-Localhost-Installation-Script/githooks
 ```
+
+### NFS
+
+Please install mage2tv/magento-cache-clean globally with composer so you can enable all cache and just run cf -w
+https://github.com/mage2tv/magento-cache-clean
+
+```
+alias cf="~/.composer/vendor/bin/cache-clean.js"
+```

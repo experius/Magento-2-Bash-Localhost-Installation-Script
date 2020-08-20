@@ -79,7 +79,7 @@ alias m='magerun'
 alias m2='magerun2'
 alias mc='magento-cloud'
 alias c='php bin/connector'
-alias cf='vendor/bin/cache-clean.js'
+alias cf='$COMPOSER_HOME/vendor/bin/cache-clean.js'
 alias b='php bin/magento'
 alias s='php bin/console'
 
@@ -152,3 +152,4 @@ function parse_git_tag() { # Git Tag
 
 # PS1 Line
 PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h:\[\e[0m\]\[\e[0;31m\]\`parse_git_branch\`\[\e[m\]\[\e[0m\]\[\e[0;38m\]\`parse_git_tag\`\[\e[m\]\[\e[00;36m\][\w]\[\e[0m\]\[\e[00;32m\]\nbash> \[\e[0m\]"
+export COMPOSER_HOME=~/.composer

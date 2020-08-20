@@ -1,3 +1,10 @@
+## 2.5.0 (2020-08-20)
+
+[View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.5.0)
+
+*  [FEATURE] Use mage2tv/magento2-cache-clean globally *(Lewis Voncken)*
+
+
 ## 2.4.0 (2020-08-20)
 
 [View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.4.0)
