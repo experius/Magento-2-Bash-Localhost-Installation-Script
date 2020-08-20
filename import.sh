@@ -25,7 +25,7 @@ if [ ! -d "$DIRECTORY" ]; then
 fi
 
 ## Unpack the files
-tar -xvf $DIRECTORY/files.tar.gz --directory $DIRECTORY -k --exclude=.idea --exclude=pub/media/catalog/product/* --exclude=media/catalog/product/* --exclude=var/log/* --exclude=var/report/*
+tar -xvf $DIRECTORY/files.tar.gz --directory $DIRECTORY -k --exclude=.idea --exclude=pub/media/catalog/product/* --exclude=media/catalog/product/* --exclude=var/log/* --exclude=var/report/* --exclude=pub/media/* --exclude=media/*
 
 ## Create and import DB
 mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -e "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE_NAME\`"
