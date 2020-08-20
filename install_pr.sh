@@ -59,9 +59,9 @@ if [ "$VERSION" ]; then
 fi
 
 if [ -z "$BRANCH" ]; then
-    git clone $REMOTE $DIRECTORY
+    git clone $REMOTE $DIRECTORY --depth=1
 else
-    git clone -b $BRANCH $REMOTE $DIRECTORY
+    git clone -b $BRANCH $REMOTE $DIRECTORY --depth=1
 fi
 git remote add fork $FORKED_REPO
 $COMPOSER install -d $DIRECTORY

@@ -1,3 +1,17 @@
+## 2.4.0 (2020-08-20)
+
+[View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.4.0)
+
+*  [FEATURE] Replace images with experius logo. Fixes broken images on local client dev envs *(dheesbeen)*
+*  [BUGFIX] - Reverse if statement logic as Magento Cloud projects may not always have an env.php *(Cas Satter)*
+*  [FEATURE] - Refactor init_cloud_env.sh and make it use the update_website command with data.sql + structure.sql in $DOMAINS_PATH folder, allowing users to easily setup a local Magento Cloud environment *(Cas Satter)*
+*  [DOCS] - Expand README.md with cloud commands *(Cas Satter)*
+*  [BUGFIX] Prevent incorrect base_url because of datetimestamp in core_config table *(Lewis Voncken)*
+*  [FEATURE] Added support for production branch *(Lewis Voncken)*
+*  [FEATURE] Exclude media on website import *(Lewis Voncken)*
+*  [FEATURE] Speed up the install of a PR env *(Lewis Voncken)*
+
+
 ## 2.3.0 (2020-04-16)
 
 [View Release](git@github.com:experius/Magento-2-Bash-Localhost-Installation-Script.git/commits/tag/2.3.0)
