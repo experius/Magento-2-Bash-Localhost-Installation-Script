@@ -1,9 +1,5 @@
 XP_TOOLS_DIR=~/tools/Magento-2-Bash-Localhost-Installation-Script
 
-function phpswitch() {
-    bash "$XP_TOOLS_DIR/phpswitch.sh" $1
-}
-
 function create_website() {
     bash "$XP_TOOLS_DIR/install.sh" $1 $2 $3 $4
 }
@@ -28,10 +24,6 @@ function update_modules() {
     bash "$XP_TOOLS_DIR/update_modules.sh"
 }
 
-function code_quality() {
-    bash "$XP_TOOLS_DIR/code_quality.sh" $1 $2 $3
-}
-
 function import_website() {
     bash "$XP_TOOLS_DIR/import.sh" $1
 }
@@ -40,116 +32,6 @@ function update_website() {
     bash "$XP_TOOLS_DIR/update.sh" $1
 }
 
-function git_import_website() {
-    bash "$XP_TOOLS_DIR/git_import.sh" $1 $2
-}
-
 function replace_images() {
     bash "$XP_TOOLS_DIR/replace_images.sh" $1
 }
-
-#source "$XP_TOOLS_DIR/environment_tools.sh"
-
-_site ()
-{
-    local cur=${COMP_WORDS[COMP_CWORD]};
-    COMPREPLY=($(compgen -W "$(ls ~/domains)" -- $cur))
-}
-
-site ()
-{
-    if [ $# -eq 0 ]; then
-        DOMAIN=`pwd | cut --delimiter="/" -f 5`;
-    else
-        DOMAIN="$@";
-    fi;
-    if [ -d ~/domains/$DOMAIN ]; then
-        cd ~/domains/$DOMAIN;
-    else
-        echo "Given website does not exists";
-    fi
-}
-complete -F _site site
-
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-
-# Magerun aliasses
-alias m='magerun'
-alias m2='magerun2'
-alias mc='magento-cloud'
-alias c='php bin/connector'
-alias cf='$COMPOSER_HOME/vendor/bin/cache-clean.js'
-alias b='php bin/magento'
-alias s='php bin/console'
-
-# PHP aliasses
-alias php7='php7.0'
-alias composer7='php7 /usr/bin/composer'
-alias php71='php7.1'
-alias composer71='php71 /usr/bin/composer'
-
-# PhpStorm aliasses
-alias p='phpstorm'
-
-# PHPX - Xdebug
-alias phpx='XDEBUG_CONFIG="idekey=PHPSTORM" php  -dxdebug.remote_enable=on -f'
-alias xphp='XDEBUG_CONFIG="idekey=PHPSTORM" php  -dxdebug.remote_enable=on -f'
-alias phpx7='XDEBUG_CONFIG="idekey=PHPSTORM" php7.0  -dxdebug.remote_enable=on -f'
-alias xphp7='XDEBUG_CONFIG="idekey=PHPSTORM" php7.0  -dxdebug.remote_enable=on -f'
-alias xb='phpx bin/magento'
-alias bx='phpx bin/magento'
-alias xc='phpx bin/connector'
-alias cx='phpx bin/connector'
-alias sx='phpx bin/console'
-alias xs='phpx bin/console'
-
-# Git aliasses
-alias gs='git status'
-alias gc='git commit'
-alias ga='git add'
-alias gb='git branch'
-alias gl='git log'
-alias gco='git checkout'
-alias gcom='git checkout master'
-alias gam='git commit --amend --no-edit'
-alias gp='git push'
-alias gpom='git push origin master'
-alias gm='git merge'
-alias gd='git diff'
-
-# Composer Lib Development alias
-alias cld='composer_lib_development'
-
-# Update Developer Programs Linux
-alias update_postman='sudo rm -rf /opt/Postman/; wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz; sudo tar -xzf postman.tar.gz -C /opt; rm postman.tar.gz'
-
-# Environment tools
-alias emnt=mount_site
-alias eumnt=umount_site
-alias edbg=debug_site
-
-# Custom prompt
-function parse_git_branch() { # Git Branch
-  BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-  if [ ! "${BRANCH}" == "" ]
-  then
-    echo "[${BRANCH}]"
-  else
-    echo ""
-  fi
-}
-
-function parse_git_tag() { # Git Tag
-  TAG=`git describe --abbrev=0 --tags 2> /dev/null`
-  if [ ! "${TAG}" == "" ]
-  then
-    echo "[${TAG}]"
-  else
-    echo ""
-  fi
-}
-
-# PS1 Line
-PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h:\[\e[0m\]\[\e[0;31m\]\`parse_git_branch\`\[\e[m\]\[\e[0m\]\[\e[0;38m\]\`parse_git_tag\`\[\e[m\]\[\e[00;36m\][\w]\[\e[0m\]\[\e[00;32m\]\nbash> \[\e[0m\]"
-export COMPOSER_HOME=~/.composer
