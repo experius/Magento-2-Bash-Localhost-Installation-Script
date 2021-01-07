@@ -80,6 +80,10 @@ do
 	mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D $MYSQL_DATABASE_NAME -e "UPDATE \`core_config_data\` SET \`value\` ='$URL$STRIPT$DOMAIN_SUFFIX/' WHERE config_id = $config_id"
 	echo "updated url for $STRIPT"
 done
+
+## Dump composer autoload without optimize setting
+cd $DIRECTORY; composer dump-autoload
+
 ## Developer Settings
 php $DIRECTORY/bin/magento deploy:mode:set developer
 $PHP $DIRECTORY/bin/magento cache:enable
